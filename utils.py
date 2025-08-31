@@ -58,8 +58,8 @@ def configure_plot_style():
 
     # Default color cycle
     colors = [
-        AIBM_COLORS["orange"],
         AIBM_COLORS["green"],
+        AIBM_COLORS["orange"],
         AIBM_COLORS["blue"],
         AIBM_COLORS["purple"],
     ]
