@@ -1,7 +1,6 @@
 """Utility functions for data analysis and visualization."""
 
 import os
-import re
 from matplotlib import font_manager
 
 import matplotlib.image as mpimg
@@ -90,8 +89,8 @@ def configure_plot_style():
     # Default spine settings (can be overridden per plot)
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
-    plt.rcParams["axes.spines.left"] = True  # Keep left spine by default
-    plt.rcParams["axes.spines.bottom"] = True  # Keep bottom spine by default
+    plt.rcParams["axes.spines.left"] = False
+    plt.rcParams["axes.spines.bottom"] = False
 
     # Default grid settings (can be overridden per plot)
     plt.rcParams["grid.color"] = AIBM_COLORS["light_gray"]
@@ -257,335 +256,9 @@ def round_into_bins(series, bin_width, low=0, high=None):
     return result
 
 
-# =============================================================================
-# Categorical Data Functions
-# =============================================================================
 
 
-def extract_categorical_mapping(series):
-    """Extract a mapping from categorical codes to descriptions.
 
-    Args:
-        series: pandas Series
-
-    Returns:
-        pd.Series mapping from codes to descriptions
-    """
-    mapping = {}
-
-    for item in series.unique():  # Process unique categorical values
-        match = re.match(r"([-\d]+)\.\s(.+)", str(item).strip())
-        if match:
-            code, description = match.groups()
-            mapping[int(code)] = description
-
-    return pd.Series(mapping).sort_index()
-
-
-def make_categorical_mappings(df, skip_cols=["age"]):
-    """Make a mapping from variable names to dictionaries of codes and values.
-
-    Args:
-        df: DataFrame
-        skip_cols: list of string column names to skip
-
-    Returns:
-        dictionary that maps from column names to dictionaries
-    """
-    mappings = {}
-    for col in df.columns:
-        if col in skip_cols:
-            continue
-        mapping = extract_categorical_mapping(df[col])
-        if len(mapping) > 0:
-            mappings[col] = mapping
-    return mappings
-
-
-def map_codes_to_categories(cat_series: pd.Series, code_series: pd.Series) -> pd.Series:
-    """Map numeric codes to category labels.
-
-    Args:
-        cat_series: Series containing category labels
-        code_series: Series containing numeric codes
-
-    Returns:
-        Series with mapped category labels
-    """
-    # Extract the mapping
-    mapping = extract_categorical_mapping(cat_series)
-
-    # Map the codes to categories
-    return code_series.map(mapping)
-
-
-# =============================================================================
-# Statistical Functions
-# =============================================================================
-
-
-def estimate_proportion_jeffreys(success_series, confidence_level=0.95):
-    """Estimate proportion using Jeffreys prior.
-
-    Args:
-        success_series: Boolean series (True = success)
-        confidence_level: Confidence level (e.g., 0.95)
-
-    Returns:
-        tuple: (proportion, lower_bound, upper_bound)
-    """
-    success_series = success_series.astype(float)
-    n = len(success_series)
-    k = success_series.sum()
-
-    # Jeffreys prior: Beta(0.5, 0.5)
-    alpha = k + 0.5
-    beta = n - k + 0.5
-
-    # Calculate posterior mean
-    proportion = alpha / (alpha + beta)
-
-    # Calculate credible interval
-    lower = beta.ppf((1 - confidence_level) / 2, alpha, beta)
-    upper = beta.ppf(1 - (1 - confidence_level) / 2, alpha, beta)
-
-    return proportion, lower, upper
-
-
-def estimate_proportion_wilson(success_series, weights_series, confidence_level=0.95):
-    """Estimate weighted proportion with Wilson score interval adjusted using effective sample size.
-
-    Args:
-        success_series: Boolean series (True = success)
-        weights_series: Corresponding weights
-        confidence_level: Confidence level (e.g., 0.95)
-
-    Returns:
-        tuple: (weighted_proportion, lower_bound, upper_bound)
-    """
-    success_series = success_series.astype(float)
-    weights_series = weights_series.astype(float)
-
-    weighted_successes = (success_series * weights_series).sum()
-    total_weight = weights_series.sum()
-
-    # Estimate effective sample size
-    n_eff = total_weight**2 / (weights_series**2).sum()
-
-    # Z-score for confidence interval
-    z = norm.ppf(1 - (1 - confidence_level) / 2)
-
-    denominator = 1 + z**2 / n_eff
-    center = (p + z**2 / (2 * n_eff)) / denominator
-    margin = (z * np.sqrt((p * (1 - p) + z**2 / (4 * n_eff)) / n_eff)) / denominator
-
-    lower = center - margin
-    upper = center + margin
-
-    return p, lower, upper
-
-
-def estimate_columns(df, columns, values):
-    """Estimate proportions for multiple columns.
-
-    Args:
-        df: DataFrame
-        columns: list of column names
-        values: list of values to estimate
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for col in columns:
-        for value in values:
-            success = df[col] == value
-            p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-            estimates.append(
-                {
-                    "column": col,
-                    "value": value,
-                    "proportion": p,
-                    "lower": lower,
-                    "upper": upper,
-                }
-            )
-    return pd.DataFrame(estimates)
-
-
-def estimate_value_map(df, columns, value_map):
-    """Estimate proportions using a value mapping.
-
-    Args:
-        df: DataFrame
-        columns: list of column names
-        value_map: dictionary mapping values to labels
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for col in columns:
-        for value, label in value_map.items():
-            success = df[col] == value
-            p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-            estimates.append(
-                {
-                    "column": col,
-                    "value": value,
-                    "label": label,
-                    "proportion": p,
-                    "lower": lower,
-                    "upper": upper,
-                }
-            )
-    return pd.DataFrame(estimates)
-
-
-def estimate_gender_map(columns, gender_map, value_map):
-    """Estimate proportions by gender.
-
-    Args:
-        columns: list of column names
-        gender_map: dictionary mapping gender codes to labels
-        value_map: dictionary mapping values to labels
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for col in columns:
-        for gender, gender_label in gender_map.items():
-            for value, label in value_map.items():
-                success = (df[col] == value) & (df["gender"] == gender)
-                p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-                estimates.append(
-                    {
-                        "column": col,
-                        "gender": gender,
-                        "gender_label": gender_label,
-                        "value": value,
-                        "label": label,
-                        "proportion": p,
-                        "lower": lower,
-                        "upper": upper,
-                    }
-                )
-    return pd.DataFrame(estimates)
-
-
-def estimate_ordinal(df, column, values, cumulative=False, confidence_level=0.84):
-    """Estimate proportions for ordinal data.
-
-    Args:
-        df: DataFrame
-        column: column name
-        values: list of values
-        cumulative: whether to compute cumulative proportions
-        confidence_level: confidence level
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for value in values:
-        if cumulative:
-            success = df[column] >= value
-        else:
-            success = df[column] == value
-        p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-        estimates.append(
-            {
-                "value": value,
-                "proportion": p,
-                "lower": lower,
-                "upper": upper,
-            }
-        )
-    return pd.DataFrame(estimates)
-
-
-def ordinal_gender_map(
-    gender_map, column, values, cumulative=False, confidence_level=0.84
-):
-    """Estimate ordinal proportions by gender.
-
-    Args:
-        gender_map: dictionary mapping gender codes to labels
-        column: column name
-        values: list of values
-        cumulative: whether to compute cumulative proportions
-        confidence_level: confidence level
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for gender, gender_label in gender_map.items():
-        for value in values:
-            if cumulative:
-                success = (df[column] >= value) & (df["gender"] == gender)
-            else:
-                success = (df[column] == value) & (df["gender"] == gender)
-            p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-            estimates.append(
-                {
-                    "gender": gender,
-                    "gender_label": gender_label,
-                    "value": value,
-                    "proportion": p,
-                    "lower": lower,
-                    "upper": upper,
-                }
-            )
-    return pd.DataFrame(estimates)
-
-
-def ordinal_age_gender_map(
-    age_map, column, values, cumulative=False, confidence_level=0.84
-):
-    """Estimate ordinal proportions by age and gender.
-
-    Args:
-        age_map: dictionary mapping age codes to labels
-        column: column name
-        values: list of values
-        cumulative: whether to compute cumulative proportions
-        confidence_level: confidence level
-
-    Returns:
-        DataFrame with estimates
-    """
-    estimates = []
-    for age, age_label in age_map.items():
-        for gender, gender_label in gender_map.items():
-            for value in values:
-                if cumulative:
-                    success = (
-                        (df[column] >= value)
-                        & (df["age"] == age)
-                        & (df["gender"] == gender)
-                    )
-                else:
-                    success = (
-                        (df[column] == value)
-                        & (df["age"] == age)
-                        & (df["gender"] == gender)
-                    )
-                p, lower, upper = estimate_proportion_wilson(success, df["weight"])
-                estimates.append(
-                    {
-                        "age": age,
-                        "age_label": age_label,
-                        "gender": gender,
-                        "gender_label": gender_label,
-                        "value": value,
-                        "proportion": p,
-                        "lower": lower,
-                        "upper": upper,
-                    }
-                )
-    return pd.DataFrame(estimates)
 
 
 # =============================================================================
@@ -807,7 +480,7 @@ def stacked_bar_chart(y, estimate, color_map, **options):
 
 
 def plot_age_gender_summary(
-    summary, age_map, group_name_map, color_map, response_map, y=0
+    summary, age_map, group_name_map, color_map, response_map, y=0, **options
 ):
     """Plot summary by age and gender.
 
@@ -818,6 +491,7 @@ def plot_age_gender_summary(
         color_map: dictionary mapping values to colors
         response_map: dictionary mapping response codes to labels
         y: starting y coordinate
+        **options: additional plotting options
     """
     # Plot each age group
     for age, age_label in age_map.items():
@@ -1237,3 +911,18 @@ def plot_indicators(df):
     add_subtext("Source: WEF Global Gender Gap Report", y=-0.05)
     logo = add_logo(location=(1.0, -0.05))
     embolden_countries(['United States'])
+
+
+# =============================================================================
+# System Functions
+# =============================================================================
+
+
+def beep():
+    """Make a beep sound to notify when a long-running process completes.
+    
+    Uses the system bell character, which works across platforms.
+    On Linux/Mac, this typically plays the terminal bell sound.
+    On Windows, this plays the system beep.
+    """
+    print('\a', end='', flush=True)
