@@ -26,3 +26,6 @@ format:
 
 tests:
 	pytest --nbmake *.ipynb
+
+zip:
+	zip sat_math_csv_files.zip sat_math_20[0-9][0-9].csv
