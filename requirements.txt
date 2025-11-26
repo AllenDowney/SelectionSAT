@@ -1,5 +1,6 @@
 jupyter
 numpy
+nutpie
 matplotlib
 pandas
 seaborn
@@ -8,4 +9,3 @@ statsmodels
 tables
 empiricaldist
 pdfplumber
-
