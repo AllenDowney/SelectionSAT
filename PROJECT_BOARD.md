@@ -8,13 +8,14 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1, step 4:** README for readers (the post, talk, slides, video and Colab first; data links; how to cite; license). Allen: check four links in a browser (step 3).
+- **Task 1, step 5:** site and SEO (mystmd). Allen: check four links in a browser (step 3).
+- **Task 2:** two background agents collecting data (national 2006–2016, state reports, redesigned SAT; retry the 10-point tables); results to review before committing.
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–3 done 2026-11-06 (link check: four for Allen); next: step 4
+**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–4 done 2026-11-06 (link check: four for Allen); next: step 5
 
 ### Inventory (2026-11-06, read-only)
 
@@ -68,7 +69,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [ ] Link check (2026-11-06; 21 URLs in the README and the notebooks): College Board PDFs, fairness-measures, the repo and the zip all 200; Wayback 2015 snapshot confirmed. **Allen to check in a browser:** the three aei.org links in `selection_bias2.ipynb` and the other notebooks (403 to scripts, as the checklist expects) and the Wayback 2014 math PDF (`web.archive.org/web/20160402182221/…/sat-percentile-ranks-mathematics-2014.pdf`; rate-limited, and the availability API lists no snapshot)
    - [x] Claims (2026-11-06): the post only says "about 30 points" (the notebook: 31.3–33.8). The README's "~8 points" was wrong; Allen chose the notebook's number: now "about 5 points" (mu 507.5 vs 502.1)
 4. README for readers of the published work
-   - [ ] The post, the talk (video, slides) and the Colab link first; the analysis in brief (keep the current text); what is where; data (College Board source and terms); run order (parse → fit → LOO); model versions; how to cite (the tag); license
+   - [x] README rewritten (2026-11-06): the talk (video `6pwtbNVgyzg`, slides, the post, Colab link, the bread notebook) first; findings (about 5 points) and method from the old text; what is where; data (links to the five PDFs, 2014–2015 via the Internet Archive); running it (Colab, mamba, run order, `make check`); model versions (kept); how to cite (the talk; the `published-2025` tag); license; learn more (*Think Bayes*, the workshop). `LICENSE` (MIT). All new links 200
+   - [ ] Decision 6 also says the notebooks' last cell states both licenses: not done yet (it would add a cell to the published notebook; ask Allen)
+   - [ ] Data terms: the College Board's terms for the percentile tables not checked yet; the README says "The SAT data are the College Board's" and publishes only parsed counts
 5. Site and SEO (decision 7: yes, mystmd)
    - [ ] mystmd with LifeExpectancy's `jb/postbuild.py`; `seo.md` checklist; `robots.txt` and the Research section on `allendowney.github.io`; Allen submits the sitemap; `repo_about.sh` (description, website, topics)
 6. Cross-links
@@ -89,7 +92,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 2: More data releases for the collection
 
-**Status:** Survey started 2026-11-06 (Allen asked); nothing downloaded into the repo. Allen decides what to add.
+**Status:** Allen chose all four (2026-11-06): retry the 10-point tables, national bands 2006–2016, state-level comparison, redesigned SAT 2017–2025. Collection running (two agents); nothing committed yet.
 
 The model uses the 2011–2015 "SAT Percentile Ranks for Males, Females, and Total Group" tables: counts by gender in **10-point bins** (61 bins). What else the College Board published:
 
