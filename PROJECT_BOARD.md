@@ -8,13 +8,13 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1, step 3:** codespell and a link check; check the claims (content issue 5: the README's ~8 points vs 5.4 in the notebook).
+- **Task 1, step 4:** README for readers (the post, talk, slides, video and Colab first; data links; how to cite; license). Allen: check four links in a browser (step 3).
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done and pushed 2026-11-06; step 2 done 2026-11-06; next: step 3
+**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–3 done 2026-11-06 (link check: four for Allen); next: step 4
 
 ### Inventory (2026-11-06, read-only)
 
@@ -64,8 +64,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Dead code (2026-11-06): `utils.py` trimmed from 928 to 163 lines (Allen: keep the style): `AIBM_COLORS`, `configure_plot_style()` (applied on import; the figures from `selection_bias.ipynb` use it), `underride`, `value_counts`, `decorate`. The scripts stay (decision in step 1); pyflakes fixes in `parse_sat_math.py`, `scripts/parse_raw.py`, `convert_notebooks_to_md.py`. The full `utils.py` is in git history
    - [x] CI: `make check` = pyflakes on the `.py` files plus `.github/scripts/check_notebooks.py` (adapted from LifeExpectancy: notebook syntax, with indented magics kept as `pass`; and the `md/` copies match the notebooks). `.github/workflows/check.yml` runs it on push. No model fits in CI
 3. Text and errors
-   - [ ] codespell and a link check (README, notebooks)
-   - [ ] Check the post's claims against the current outputs; anything different goes in content issues
+   - [x] codespell (2026-11-06): no typos in the README, `CLAUDE.md`, `md/`, the scripts
+   - [ ] Link check (2026-11-06; 21 URLs in the README and the notebooks): College Board PDFs, fairness-measures, the repo and the zip all 200; Wayback 2015 snapshot confirmed. **Allen to check in a browser:** the three aei.org links in `selection_bias2.ipynb` and the other notebooks (403 to scripts, as the checklist expects) and the Wayback 2014 math PDF (`web.archive.org/web/20160402182221/…/sat-percentile-ranks-mathematics-2014.pdf`; rate-limited, and the availability API lists no snapshot)
+   - [x] Claims (2026-11-06): the post only says "about 30 points" (the notebook: 31.3–33.8). The README's "~8 points" was wrong; Allen chose the notebook's number: now "about 5 points" (mu 507.5 vs 502.1)
 4. README for readers of the published work
    - [ ] The post, the talk (video, slides) and the Colab link first; the analysis in brief (keep the current text); what is where; data (College Board source and terms); run order (parse → fit → LOO); model versions; how to cite (the tag); license
 5. Site and SEO (decision 7: yes, mystmd)
@@ -82,4 +83,4 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 2. README: no links to the post, talk, slides, video or Colab; `conda` instructions.
 3. No license on GitHub.
 4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).
-5. **The README's "~8 points" doesn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).
+5. ~~**The README's "~8 points"**~~: fixed to about 5 (Allen, 2026-11-06). Still open: the `.nc` question below. **The README's "~8 points" didn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).

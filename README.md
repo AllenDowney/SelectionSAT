@@ -46,7 +46,7 @@ The `selection_bias.ipynb` notebook contains a Bayesian analysis of selection bi
 
 - **Gender difference in selection**: Selection effects are substantially stronger for males than females
 
-- **Reduced true ability gap**: When accounting for selection bias, the estimated difference in underlying math efficacy between genders drops from 31-34 points to only ~8 points
+- **Reduced true ability gap**: When accounting for selection bias, the estimated difference in underlying math efficacy between genders drops from 31-34 points to only about 5 points (posterior means of 507.5 for males and 502.1 for females in the hierarchical model, `selection_bias3.ipynb`)
 
 ### Methodology
 
