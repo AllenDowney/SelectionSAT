@@ -10,6 +10,10 @@ Add at the end of the post:
 
 > **Update (November 2026):** The notebooks, data and results from this talk are now collected on a site: [The SAT Math Gap](https://allendowney.github.io/SelectionSAT/). The short version: male test takers scored 31–34 points higher than female test takers in 2011–2015, but after accounting for who takes the test, the model's estimate of the difference in math ability is only about 5 points. The code is on [GitHub](https://github.com/AllenDowney/SelectionSAT), and the [notebook runs on Colab](https://colab.research.google.com/github/AllenDowney/SelectionSAT/blob/main/selection_bias3.ipynb).
 
+Then, as on the blog (AllenDowneyCom Task 23, 2026-11-06), a second paragraph:
+
+> The Bayesian methods in the talk are from [*Think Bayes*, second edition](https://greenteapress.com/wp/think-bayes/?from=substack-sat-math), which you can read online for free or order from [Bookshop.org](https://bookshop.org/a/98697/9781492089469) or [Amazon](https://amzn.to/334eqGo) (affiliate links).
+
 After editing, check the live post through the API (`updated_at`) and that the slug is this one.
 
 ## 2. Blog post
