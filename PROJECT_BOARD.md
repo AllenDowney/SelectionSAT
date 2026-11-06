@@ -8,14 +8,14 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1, step 5:** site and SEO (mystmd). Allen: check four links in a browser (step 3).
+- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); refit and release the `.nc` (step 7); four links to check in a browser (step 3).
 - **Task 2:** paused to assess the collected data against the College Board's terms (see Task 2).
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–4 done 2026-11-06 (link check: four for Allen); next: step 5
+**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–6 done 2026-11-06 (site live); open items for Allen in steps 3, 5, 6; step 7: the `.nc` release
 
 ### Inventory (2026-11-06, read-only)
 
@@ -77,7 +77,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Site in `jb/` (2026-11-06; Jupyter Book 2.1.2 / book theme): `myst.yml`, `index.md` (the talk with the video embedded, findings with the mu posterior figure, pages, data, how to cite), `versions.md`; the notebooks render in place from `../` (no copies), with their saved outputs. `postbuild.py` from LifeExpectancy (`BASE = '/SelectionSAT'`), plus `DESCRIPTIONS` for the two notebook pages (the theme gives them the project's description; a frontmatter cell would show on Colab). Social image `figs/selection_bias33.png`. Test build in a scratch copy: 4 pages, sitemap with real URLs, no localhost, canonical, counter, descriptions. Allen reviewed it ("looks good")
    - [x] Notebook headings retitled (Allen): "The SAT Math Gap: A Selection Model" (`selection_bias3.ipynb`), "Which Data Matter Most? Leave-One-Out Analysis" (`selection_bias3_loo.ipynb`)
    - [x] `environment.yml`: `jupyter-book>=2`, `ghp-import`; `jb/_build/` gitignored
-   - [ ] Deploy (`cd jb && make deploy`), then push `~/AllenDowney.github.io` (robots.txt `Sitemap:` line, sitemap index regenerated, Research entry: prepared, uncommitted) and set the About box (`gh repo edit`; `~/GreenTeaPress/scripts/repo_about.sh` has the SelectionSAT line, committed locally there)
+   - [x] **Live 2026-11-06: https://allendowney.github.io/SelectionSAT/** (gh-pages via ghp-import; built with the LifeExpectancy env's Jupyter Book 2.1.2 while the SelectionSAT env update ran). All pages, sitemap and robots.txt 200. `~/AllenDowney.github.io`: `Sitemap:` line, sitemap index regenerated, Research entry; pushed. About box: website, topics, description (`gh repo edit`; the same line in `~/GreenTeaPress/scripts/repo_about.sh`, committed locally there)
    - [ ] Allen: submit `https://allendowney.github.io/SelectionSAT/sitemap.xml` in Search Console; tick GreenTeaPress Task 22
 6. Cross-links
    - [x] Related posts (2026-11-06, `related-articles`): The Poincaré Problem, Berkson Goes to College, Factors of Underrepresentation, Causation Collision and Confusion; on the site's landing page ("Related posts")
