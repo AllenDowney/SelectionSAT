@@ -331,3 +331,12 @@ The visualization uses:
 - Marker color: Red for high Pareto-k (> 0.7), orange for medium (0.5-0.7), blue for low (< 0.5)
 - Marker transparency: Higher opacity for more problematic observations
 
+
+
+[SelectionSAT](https://github.com/AllenDowney/SelectionSAT)
+
+Copyright 2025 Allen Downey
+
+Code license: [MIT License](https://opensource.org/license/MIT)
+
+Text license: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)

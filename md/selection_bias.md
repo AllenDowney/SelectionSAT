@@ -900,3 +900,11 @@ While the difference in scores is consistently 31-34 points, the difference in a
 ```python
 
 ```
+
+[SelectionSAT](https://github.com/AllenDowney/SelectionSAT)
+
+Copyright 2025 Allen Downey
+
+Code license: [MIT License](https://opensource.org/license/MIT)
+
+Text license: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
