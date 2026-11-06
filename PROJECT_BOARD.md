@@ -8,7 +8,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); four links to check in a browser (step 3).
+- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); the Wayback 2014 link to recheck later (step 3).
 - **Task 2:** paused to assess the collected data against the College Board's terms (see Task 2).
 
 ---
@@ -66,7 +66,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] CI: `make check` = pyflakes on the `.py` files plus `.github/scripts/check_notebooks.py` (adapted from LifeExpectancy: notebook syntax, with indented magics kept as `pass`; and the `md/` copies match the notebooks). `.github/workflows/check.yml` runs it on push. No model fits in CI
 3. Text and errors
    - [x] codespell (2026-11-06): no typos in the README, `CLAUDE.md`, `md/`, the scripts
-   - [ ] Link check (2026-11-06; 21 URLs in the README and the notebooks): College Board PDFs, fairness-measures, the repo and the zip all 200; Wayback 2015 snapshot confirmed. **Allen to check in a browser:** the three aei.org links in `selection_bias2.ipynb` and the other notebooks (403 to scripts, as the checklist expects) and the Wayback 2014 math PDF (`web.archive.org/web/20160402182221/…/sat-percentile-ranks-mathematics-2014.pdf`; rate-limited, and the availability API lists no snapshot)
+   - [ ] Link check (2026-11-06; 21 URLs in the README and the notebooks): College Board PDFs, fairness-measures, the repo and the zip all 200; Wayback 2015 snapshot confirmed. **Allen checked in a browser (2026-11-06): the three aei.org links are good.** Still unconfirmed: the Wayback 2014 math PDF (`web.archive.org/web/20160402182221/…/sat-percentile-ranks-mathematics-2014.pdf`), 429 in Allen's browser too, most likely the Internet Archive rate-limiting this network's IP after the day's scripted requests. Recheck later or from another network; if the snapshot is gone, find another (the availability API listed none at that timestamp) or cite the College Board's 2014 group-data CSV
    - [x] Claims (2026-11-06): the post only says "about 30 points" (the notebook: 31.3–33.8). The README's "~8 points" was wrong; Allen chose the notebook's number: now "about 5 points" (mu 507.5 vs 502.1)
 4. README for readers of the published work
    - [x] README rewritten (2026-11-06): the talk (video `6pwtbNVgyzg`, slides, the post, Colab link, the bread notebook) first; findings (about 5 points) and method from the old text; what is where; data (links to the five PDFs, 2014–2015 via the Internet Archive); running it (Colab, mamba, run order, `make check`); model versions (kept); how to cite (the talk; the `published-2025` tag); license; learn more (*Think Bayes*, the workshop). `LICENSE` (MIT). All new links 200
