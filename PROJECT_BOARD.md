@@ -149,6 +149,12 @@ Participation from the **NCES Digest table 226.40** (federal, public domain: 201
 - Graduates by sex: **find state-reported graduates by sex** (coverage will be uneven)
 - **Publish neither the derived data nor the scripts**; `data/` and the Task 2 scripts stay local
 
+### Graduates by sex (2026-11-06)
+
+- Found (NCES, public domain; public schools only): **2009–10** (NCES 2013-309, table 8: graduates by sex and state) and **2011–12** (Digest 2015, table 219.33). Not found as counts: 2008–09 (only in an older CCD file), 2010–11 (NCES 2014-391 has graduation rates by sex, not counts), 2012–13 (no later edition of table 219.33)
+- `scripts/nces_graduates.py` (local) → `data/nces_graduates_by_sex.csv`: 101 state-years. The male share of graduates ranges from 43% to 52% across states and changed by at most 2.5 points within a state from 2010 to 2012, so for 2009, 2011 and 2013 use the nearest year's share times the total graduates (implied by NCES participation)
+- Caveat: SAT takers include private-school students; the graduates are public-school only
+
 ### Consistent with the terms? (to decide)
 
 - Downloading individual reports that the College Board posts for the public, for analysis, is their intended use; **bulk automated downloading** is what the no-scraping clause most plausibly covers.
