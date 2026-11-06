@@ -56,6 +56,8 @@ The data are the College Board's "SAT Percentile Ranks for Males, Females, and T
 
 ("Mathemathics" is the College Board's spelling.) The PDFs are not in this repository; [`sat_math_csv_files.zip`](sat_math_csv_files.zip) holds the counts parsed from them, one CSV file per year, with columns `Score`, `Total_Number`, `Male_Number`, `Female_Number`.
 
+**Source:** College Board, *SAT Percentile Ranks for Males, Females, and Total Group: Mathematics*, College-Bound Seniors 2011–2015. The data are the College Board's; the counts are reproduced here for research and teaching, with attribution, and are not covered by this repository's licenses.
+
 ## Running it
 
 The quickest way is [Colab](https://colab.research.google.com/github/AllenDowney/SelectionSAT/blob/main/selection_bias3.ipynb): the notebook installs what it needs and downloads the data.
@@ -134,7 +136,7 @@ For the code, cite this repository at the tag `published-2025`, the version used
 
 ## License
 
-The code is available under the [MIT License](LICENSE). The text and figures are available under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/). The SAT data are the College Board's.
+The code is available under the [MIT License](LICENSE). The text and figures are available under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/). The SAT data are the College Board's (see [Data](#data)).
 
 ## Learn more
 

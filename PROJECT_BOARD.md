@@ -9,7 +9,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 ### Current focus (2026-11-06)
 
 - **Task 1, step 5:** site and SEO (mystmd). Allen: check four links in a browser (step 3).
-- **Task 2:** two background agents collecting data (national 2006–2016, state reports, redesigned SAT; retry the 10-point tables); results to review before committing.
+- **Task 2:** paused to assess the collected data against the College Board's terms (see Task 2).
 
 ---
 
@@ -71,8 +71,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 4. README for readers of the published work
    - [x] README rewritten (2026-11-06): the talk (video `6pwtbNVgyzg`, slides, the post, Colab link, the bread notebook) first; findings (about 5 points) and method from the old text; what is where; data (links to the five PDFs, 2014–2015 via the Internet Archive); running it (Colab, mamba, run order, `make check`); model versions (kept); how to cite (the talk; the `published-2025` tag); license; learn more (*Think Bayes*, the workshop). `LICENSE` (MIT). All new links 200
    - [ ] Decision 6 also says the notebooks' last cell states both licenses: not done yet (it would add a cell to the published notebook; ask Allen)
-   - [ ] Data terms: the College Board's terms for the percentile tables not checked yet; the README says "The SAT data are the College Board's" and publishes only parsed counts
-5. Site and SEO (decision 7: yes, mystmd)
+   - [x] License cell (code MIT, text CC BY-NC-SA 4.0, repo link) at the end of all five notebooks (Allen, 2026-11-06)
+   - [ ] **Data terms** (looked up 2026-11-06): collegeboard.org/site-terms now redirects to the student legal terms (privacy.collegeboard.org/student-legal-terms). Section 8: "Our Content may not be distributed, downloaded, uploaded, reproduced, reposted, retransmitted, disseminated, sold, published, broadcast, or circulated, or otherwise used, in part or in whole, in any way whatsoever without our express written permission," and "You may not … scrape or data-mine College Board Services or Content." Section 10: non-commercial use only. No terms specific to the research reports were found, and no permission process for them (the permission form covers test materials). The repo has published parsed counts (`sat_math_csv_files.zip`) since 2025; numerical facts aren't copyrightable in the US, but the terms are contractual. Allen (2026-11-06): **keep the zip, with attribution**; no permission request
+5. Site and SEO (decision 7: yes; Allen confirmed Jupyter Book 2 / MyST, 2026-11-06)
    - [ ] mystmd with LifeExpectancy's `jb/postbuild.py`; `seo.md` checklist; `robots.txt` and the Research section on `allendowney.github.io`; Allen submits the sitemap; `repo_about.sh` (description, website, topics)
 6. Cross-links
    - [ ] The post already links the Colab notebook. Add the repo (or site) link to the Substack and blog posts if Allen wants (drafts; back up the blog first)
@@ -92,13 +93,30 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 2: More data releases for the collection
 
-**Status:** Allen chose all four (2026-11-06): retry the 10-point tables, national bands 2006–2016, state-level comparison, redesigned SAT 2017–2025. Collection running (two agents); nothing committed yet.
+**Status:** **Paused 2026-11-06** (Allen) to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
 
-The model uses the 2011–2015 "SAT Percentile Ranks for Males, Females, and Total Group" tables: counts by gender in **10-point bins** (61 bins). What else the College Board published:
+### What happened
 
-- **Same 10-point tables, other years: not found yet.** Guessed URLs for 2008–2010 math-only tables return 404 on `secure-media.collegeboard.org`. A third-party guide (collegestats.org) refers to a 2009 math table by gender. The way to settle it is the Wayback CDX index of `secure-media.collegeboard.org/digitalServices/pdf/*` (rate-limited on 2026-11-06; retry later, slowly).
-- **Total Group Profile Reports, 2006–2016 (old SAT, 200–800 scale): counts by gender in 100-point bands** (6 bins: 200–290 … 700–800) for math, reading and writing. Confirmed for 2010 (`research/2010-total-group-profile-report-cbs.pdf`, Table 5) and 2016 (`reports.collegeboard.org/media/pdf/2016-total-group-sat-suite-assessments-annual-report.pdf`); also listed: 2006 (`research/cb-seniors-2006-national-report.pdf`), 2007 (`research/cb-seniors-2007-national-report.pdf`), 2008 (`research/Total_Group_Report_CBS_08.pdf`), 2011 (`research/cbs2011_total_group_report.pdf`). These would extend the series to 2006–2016, at coarser resolution: the model would need binned (interval) likelihoods, and the 10-point "spikes" can't be modeled from them.
-- **State reports, same years and format** (e.g. `research/CT_10_03_03_01.pdf`, `ME_10_…`, `DE_12_…`): the same 100-point bands by gender, per state, with participation rates. **Analysis idea:** participation varies a lot between states (near-universal where the state pays for the SAT, e.g. Maine, Delaware, later Connecticut and Michigan), so the gender gap vs participation rate across states is a direct test of the selection explanation.
-- **SAT Suite annual reports, 2017–2025 (redesigned SAT):** percentages (not counts) by gender in 100-point bands, plus totals by gender. A different test and scale, so not poolable with 2011–2015, but a separate series. Confirmed for 2019 (`reports.collegeboard.org/media/pdf/2019-total-group-sat-suite-assessments-annual-report.pdf`); the 2025 URL found by search returned 404.
+Allen asked (2026-11-06) to look for more data, then chose all four leads: retry the 10-point tables, national bands 2006–2016, state-level comparison, redesigned SAT. Two background agents **started downloading** College Board PDFs and parsing them. Then the terms lookup (Task 1, step 4) found section 8 of the College Board's site terms: no scraping or data-mining of their content, and no reproducing or reposting it without written permission. **The state-report download was stopped partway** (149 of about 306 known state files), and Allen paused the task to check against the terms before going further. Downloaded so far: 10 national reports, 149 state reports, 9 national suite reports (about 38 MB, in `data/raw/`, gitignored).
 
-Decisions for Allen: which of these to add (to `sat_math_csv_files.zip`, or a second zip); whether the state-level comparison is worth a notebook; data terms (the README links the PDFs, as for 2011–2015).
+### What we have (local only)
+
+| File | Contents | Source PDFs |
+|---|---|---|
+| `data/sat_bands_national.csv` | Old SAT, national, counts by sex in score bands: 50-point bands 2005–2008 (12 bins), 100-point bands 2009–2013 and 2016 (6 bins); math, reading, writing. 2014–2015 not found | `research/cb-seniors-2005-total-group-report.pdf`, `…-2006-national-report.pdf`, `…-2007-national-report.pdf`, `Total_Group_Report_CBS_08.pdf`, `cbs-2009-national-TOTAL-GROUP.pdf`, `2010-total-group-profile-report-cbs.pdf`, `cbs2011_total_group_report.pdf`, `TotalGroup-2012.pdf`, `2013/TotalGroup-2013.pdf`, reports.collegeboard.org 2016 suite report |
+| `data/sat_bands_state.csv`, `data/sat_participation_state.csv` | Old SAT, 25 states (AL–MS, with DC), 2009–2013 and 2016: counts by sex in 100-point bands; test takers and mean math by sex. No participation rate (needs graduates: NCES Digest table 226.40, public domain) | `research/ST_yy_03_03_01.pdf` (2009–2012), `research/2013/ST_13_…`, `reports.collegeboard.org/media/pdf/st16030301.pdf` |
+| `data/sat_bands_suite.csv` | Redesigned SAT, national, 2018–2025: **percentages** by sex in 100-point bands (2017 has no bands by sex) | reports.collegeboard.org data archive |
+
+Checks: Male + Female = Total in every band (where Total excludes students with no gender); bands sum to the reported test takers; 2011–2013 bands equal the 10-point tables summed. Parsers: `scripts/parse_total_group.py`, `scripts/parse_state_reports.py`, `scripts/parse_suite_reports.py` (uncommitted). **No 10-point tables for other years were found** (URL guesses 404; the Wayback index was rate-limited).
+
+### How useful (first look)
+
+- **State level looks most valuable.** In 2012 the math gap is smallest where nearly everyone takes the SAT: Maine 13 points (51.6% of test takers male), Delaware 21 (48.3%), both states that paid for the SAT for all students; in low-participation "ACT states" it is 40–46 (Iowa 46, Mississippi 43). Across the 25 states the gap ranges 12–62 points in each year, against about 31–37 nationally. That is a direct, model-free check of the selection explanation, and a natural extension of the model (selection varies by state with participation).
+- **National bands 2005–2016:** extend the series, but at 6–12 bins the model's 10-point "spikes" can't be fitted; useful for a binned-likelihood version or a check that the estimated selection is stable over time.
+- **Redesigned SAT 2018–2025:** a different test and scale, percentages only; a separate, simpler comparison (Male 11–13% vs Female 6–8% in the 700–800 math band).
+
+### Consistent with the terms? (to decide)
+
+- Downloading individual reports that the College Board posts for the public, for analysis, is their intended use; **bulk automated downloading** is what the no-scraping clause most plausibly covers.
+- Alternatives: ask the College Board for permission or a data file (permission form, or the research office); **state education departments** post their own state's reports (e.g. New Hampshire's 2014 report on education.nh.gov), under their own terms; **NCES Digest** tables (federal, public domain) give means by sex and participation by state, though not distributions.
+- Publishing: like `sat_math_csv_files.zip` (Allen: keep it, attributed), but any new data release is a separate decision.

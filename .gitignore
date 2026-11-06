@@ -13,3 +13,6 @@ sat_math_*.csv
 
 # Fitted model; published as a GitHub release asset
 *.nc
+
+# Task 2 data collection (paused; not published)
+data/
