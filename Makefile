@@ -1,31 +1,24 @@
 PROJECT_NAME = SelectionSAT
-PYTHON_VERSION = 3.11
-PYTHON_INTERPRETER = python
 
 create_environment:
-	conda create -y -c conda-forge --name $(PROJECT_NAME) python pymc
-	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
+	mamba env create -f environment.yml
+	@echo ">>> Environment created. Activate with: mamba activate $(PROJECT_NAME)"
+
+update_environment:
+	mamba env update -f environment.yml --prune
 
 delete_environment:
-	conda env remove --name $(PROJECT_NAME)
-
-requirements:
-	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
-	$(PYTHON_INTERPRETER) -m pip install -r requirements-dev.txt
+	mamba env remove --name $(PROJECT_NAME)
 
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-lint:
-	flake8 code
-	black --check --config pyproject.toml code
-
-format:
-	black --config pyproject.toml code
-
-tests:
-	pytest --nbmake *.ipynb
+# Regenerate the jupytext copies in md/ after changing a notebook
+md:
+	python convert_notebooks_to_md.py
 
 zip:
 	zip sat_math_csv_files.zip sat_math_20[0-9][0-9].csv
+
+.PHONY: create_environment update_environment delete_environment clean md zip

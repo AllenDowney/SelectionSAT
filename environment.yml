@@ -1,0 +1,39 @@
+# mamba env create -f environment.yml
+# mamba activate SelectionSAT
+#
+# The modeling stack is pinned to the versions that produced the published
+# results (December 2025). Don't upgrade it without rechecking the numbers
+# against the post.
+name: SelectionSAT
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.13
+  - pip
+
+  # Data and plotting
+  - numpy=2.2
+  - pandas=2.3
+  - scipy=1.16
+  - xarray
+  - h5netcdf          # read and write the saved fit (.nc)
+  - matplotlib
+  - seaborn
+
+  # Bayesian modeling
+  - pymc=5.25
+  - pytensor=2.31
+  - arviz=0.22
+  - nutpie=0.16
+  - preliz=0.20
+
+  # Notebooks and checks
+  - jupyterlab
+  - jupytext          # convert_notebooks_to_md.py
+  - nbformat
+  - pyflakes
+
+  - pip:
+      - empiricaldist==0.9.0
+      - pdfplumber==0.11.7   # parse_sat_math.py, scripts/parse_raw.py

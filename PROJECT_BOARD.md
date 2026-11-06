@@ -8,13 +8,13 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1, step 1:** tags, triage, `CLAUDE.md`, `environment.yml`; then check whether the Colab link in the post still works (it probably doesn't: content issue 1).
+- **Task 1, step 2:** the Colab install cell (content issue 1) and a Colab run of `selection_bias3.ipynb`; then dead code (`utils.py`) and `make check`.
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Step 0 done 2026-11-06 (inventory, decisions); next: step 1
+**Status:** Steps 0–1 done 2026-11-06 (local commits, not pushed); next: step 2
 
 ### Inventory (2026-11-06, read-only)
 
@@ -50,9 +50,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Allen answered the decisions (2026-11-06, above)
 1. Set up
    - [x] Tagged `pydata-boston-2025` and `published-2025` on `6997859`, pushed (2026-11-06)
-   - [ ] Triage untracked files with Allen (decisions 3–5); `.gitignore` for the rest (`.vscode/`, `.ipynb_checkpoints/`, `__pycache__/`, data PDFs if not published, `*.nc`)
-   - [ ] Short `CLAUDE.md` (what the repo is, the published notebook and its frozen path, the talk and post, data terms, this checklist)
-   - [ ] `environment.yml` (`mamba env create -f environment.yml`, env `SelectionSAT`); Makefile targets fixed or removed (`lint`/`format` point at nothing)
+   - [x] Triaged untracked files (2026-11-06; Allen's answers: regenerate and commit `md/`; commit `figs/`; commit the helpers in `scripts/`; delete `plan.md`). Figures moved to `figs/`; `selection_bias.ipynb`, `selection_bias3.ipynb` and `selection_bias3_loo.ipynb` now create `figs/` and save there (only those lines changed). `md/` regenerated with `convert_notebooks_to_md.py` (the old copies were stale: `md/selection_bias3.md` lacked 18 cells); `make md` regenerates it. Deleted `plan.md` and the September `selection_bias.png`, `selection_bias2.png` (copies in the session scratchpad). `.gitignore`: PDFs, College Board CSVs, the unzipped `sat_math_*.csv`, `*.nc`, clutter
+   - [x] `CLAUDE.md`
+   - [x] `environment.yml`, pinned to the versions in the existing `SelectionSAT` env (Python 3.13, PyMC 5.25, ArviZ 0.22, nutpie 0.16, PreliZ 0.20; `--dry-run` solves). Removed the unpinned `requirements*.txt`. Makefile: mamba targets and `make md`; removed `lint`/`format` (pointed at nothing), `requirements` and `tests` (refit every model; step 2's `make check` replaces it). README install steps use mamba
 2. Code and CI
    - [ ] Colab: fix the install cell (content issue 1) and run `selection_bias3.ipynb` on Colab (`colab-run` skill); compare the key numbers with the post (the gap from ~31–34 points to ~8)
    - [ ] Dead code: `utils.py`, `parse_raw.py`, `download_math_csv.py`, `convert_notebooks_to_md.py` (keep, merge or delete)
@@ -75,4 +75,4 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 1. **The Colab link may be broken.** The notebook installs `nutpie` alone on Colab (`%pip install nutpie`). Since ArviZ 1.x, that pulls the new ArviZ and breaks Colab's older PyMC (Allen's rule, 2026-11-04). The fix: one install cell before importing PyMC, `if "google.colab" in sys.modules: %pip install -q "pymc>=6" "arviz>=1.1" nutpie preliz empiricaldist`, then check the results still match the post (a library upgrade). If the notebook must stay on PyMC 5: pin `"arviz<1"` instead. Run on Colab before and after to confirm.
 2. README: no links to the post, talk, slides, video or Colab; `conda` instructions.
 3. No license on GitHub.
-4. `plan.md` (LOO plan): done (the notebook and the influence figure exist) or still open?
+4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).

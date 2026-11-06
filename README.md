@@ -16,23 +16,18 @@ The repository includes:
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/AllenDowney/SelectionSAT.git
 cd SelectionSAT
 ```
 
-2. Create the conda environment:
+2. Create the environment (from `environment.yml`, with the modeling stack pinned to the versions that produced the published results):
 ```bash
-make create_environment
+mamba env create -f environment.yml
 ```
 
 3. Activate the environment:
 ```bash
-conda activate SelectionSAT
-```
-
-4. Install additional requirements:
-```bash
-make requirements
+mamba activate SelectionSAT
 ```
 
 
