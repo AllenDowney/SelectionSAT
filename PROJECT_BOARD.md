@@ -102,7 +102,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 2: More data releases for the collection
 
-**Status:** **Paused 2026-11-06** (Allen); assessment of the state data done the same day (below). Paused to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
+**Status:** **Resumed 2026-11-06 at a slow rate** (Allen: "we have half of the data. I'm not sure our downloading constitutes scraping"): `scripts/download_state_reports.sh` gets the remaining state reports (2009–2013, 2016), one request every 30 seconds, stopping on 429/403. Earlier the same day: paused, then assessed (below). Paused to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
 
 ### What happened
 
