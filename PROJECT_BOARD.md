@@ -8,14 +8,14 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); refit and release the `.nc` (step 7); four links to check in a browser (step 3).
+- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); four links to check in a browser (step 3).
 - **Task 2:** paused to assess the collected data against the College Board's terms (see Task 2).
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–6 done 2026-11-06 (site live); open items for Allen in steps 3, 5, 6; step 7: the `.nc` release
+**Status:** Steps 0–1 done and pushed 2026-11-06; steps 2–6 done 2026-11-06 (site live); open items for Allen in steps 3 and 6; step 7 done (release `fit-2026-11`)
 
 ### Inventory (2026-11-06, read-only)
 
@@ -87,7 +87,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [ ] Allen: paste the Substack and blog updates; then check the live post (`updated_at`)
    - [x] *Think Bayes* and the PyMC Labs workshop in the README's "Learn more"
 7. Close
-   - [ ] **The fit as a release asset (plan, 2026-11-06).** `selection_bias3_idata.nc` (2025-11-26, 179 MB) is not the published fit (content issue 5). Plan: (1) **on Unity** (Allen: heavy fits on Unity; `unity/refit.sh`, set up 2026-11-06) run a copy of `selection_bias3.ipynb` with the `to_netcdf` line on, in the pinned env (the committed notebook keeps its published outputs); check the posterior means against the published ones (mu 507.5 / 502.1); (2) publish the `.nc` as an asset of a GitHub release `selection-fit-2026` (or attach to the `published-2025` tag's release, noting it's a refit); (3) in `selection_bias3_loo.ipynb`, download the file from the release if it's missing (like the zip); (4) rerun the LOO notebook against it and compare its influence figure with `figs/selection_bias3_loo_influence.png`. Allen decides whether the refit (not the original fit) is acceptable as "the published fit"
+   - [x] **The fit as a release asset (done 2026-11-06).** The saved `selection_bias3_idata.nc` (2025-11-26) was not the published fit and had no log-likelihood (the LOO notebook's outputs show the 2025-11-21 fit it ran against did). Refit on Unity (`unity/refit.sh`; env `SelectionSAT` built there from `environment.yml`; 7–8 minutes on 4 CPUs): the first refit matched but had no log-likelihood, so the job now runs `pm.compute_log_likelihood` before saving (doesn't change the draws). Result: mu 507.59 / 502.08 (published 507.5 / 502.1), r-hat at most 1.00, no divergences, `log_likelihood.obs_bins` (4, 1000, 5, 2). The LOO notebook run against it reproduces the published influence figure. **Release `fit-2026-11`** (Allen's choice) with the `.nc` (checksum verified after download); `selection_bias3_loo.ipynb` downloads it if missing; README and `CLAUDE.md` updated; site redeployed. Local copies: `selection_bias3_idata.nc` (the refit), `results/old/selection_bias3_idata_2025-11-26.nc`, `results/refit-2026-11-06-nolik/`
    - [ ] Note what was done in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17 (done 2026-11-06, see there; update at the end)
 
 ### Content issues (Allen decides)
@@ -96,7 +96,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 2. README: no links to the post, talk, slides, video or Colab; `conda` instructions.
 3. No license on GitHub.
 4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).
-5. ~~**The README's "~8 points"**~~: fixed to about 5 (Allen, 2026-11-06). Still open: the `.nc` question below. **The README's "~8 points" didn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).
+5. ~~**The README's "~8 points"**~~: fixed to about 5 (Allen, 2026-11-06). ~~The `.nc` question~~: resolved by the refit and release `fit-2026-11` (step 7). **The README's "~8 points" didn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).
 
 ---
 
