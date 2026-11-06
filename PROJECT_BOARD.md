@@ -14,7 +14,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done 2026-11-06 (local commits, not pushed); next: step 2
+**Status:** Steps 0–1 done and pushed 2026-11-06; step 2 under way (Colab)
 
 ### Inventory (2026-11-06, read-only)
 
@@ -54,7 +54,13 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] `CLAUDE.md`
    - [x] `environment.yml`, pinned to the versions in the existing `SelectionSAT` env (Python 3.13, PyMC 5.25, ArviZ 0.22, nutpie 0.16, PreliZ 0.20; `--dry-run` solves). Removed the unpinned `requirements*.txt`. Makefile: mamba targets and `make md`; removed `lint`/`format` (pointed at nothing), `requirements` and `tests` (refit every model; step 2's `make check` replaces it). README install steps use mamba
 2. Code and CI
-   - [ ] Colab: fix the install cell (content issue 1) and run `selection_bias3.ipynb` on Colab (`colab-run` skill); compare the key numbers with the post (the gap from ~31–34 points to ~8)
+   - [x] Colab: fix the install cell (content issue 1) and run `selection_bias3.ipynb` on Colab (`colab-run` skill); compare the key numbers with the post (the gap from ~31–34 points to ~8)
+     - Allen first chose upgrading to PyMC 6 on Colab, then **stay on PyMC 5** (2026-11-06) after the first Colab run showed ArviZ 1.x has no `plot_posterior` (about 9 plotting cells would need porting) and that Colab ships PyMC 5.28 with ArviZ 0.22. The three `try/except %pip install` cells are now one: `if "google.colab" in sys.modules: %pip install -q nutpie "arviz<1" preliz empiricaldist`.
+     - **The published notebook never ran on Colab:** the data cell used `zip_filename` without defining it (it only worked where the CSVs already existed). Fixed: the download cell defines it.
+     - Install cell, after three Colab runs (each newer package upgrades the stack: nutpie pulled PyTensor 3, the latest PreliZ needs ArviZ 1): `%pip install -q nutpie "pymc<6" "arviz<1" "preliz==0.20.*" empiricaldist`.
+     - [x] **Colab run passes** (2026-11-06; Colab: Python 3.13, PyMC 5.28.5, ArviZ 0.22): all 85 code cells. Numbers match the published outputs within sampling noise: hierarchical `mu` Male 507.47 vs 507.50, Female 502.08 vs 502.08; model 2 `mu` 508.84 vs 508.81; model 1 `mu` 525.97 vs 526.19. Colab runs fewer chains (2,000 posterior-predictive draws vs 4,000; lower ESS). The committed notebook keeps its published outputs; only the setup and download cells changed.
+     - Reference numbers: the post (a talk announcement) says only "about 30 points"; the observed gaps the notebook prints are 31.4, 33.8, 31.5, 31.3, 31.3 (2011–2015); the "~8 points" is the README's claim, shown only in plots (`selection_bias33.png`).
+     - `selection_bias3_idata.nc` (2025-11-26) is not necessarily the published fit: the `to_netcdf` line in the published notebook is commented out. Its posterior mean of `mu` is 503.0 (Male) vs 502.6 (Female), a gap of ~0.3, not ~8 (content issue 5).
    - [ ] Dead code: `utils.py`, `parse_raw.py`, `download_math_csv.py`, `convert_notebooks_to_md.py` (keep, merge or delete)
    - [ ] CI: `make check` = pyflakes plus a syntax check of the notebooks (LifeExpectancy's `.github/scripts/check_notebooks.py`); no model fits in CI unless Allen wants a fast test
 3. Text and errors
@@ -72,7 +78,8 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Content issues (Allen decides)
 
-1. **The Colab link may be broken.** The notebook installs `nutpie` alone on Colab (`%pip install nutpie`). Since ArviZ 1.x, that pulls the new ArviZ and breaks Colab's older PyMC (Allen's rule, 2026-11-04). The fix: one install cell before importing PyMC, `if "google.colab" in sys.modules: %pip install -q "pymc>=6" "arviz>=1.1" nutpie preliz empiricaldist`, then check the results still match the post (a library upgrade). If the notebook must stay on PyMC 5: pin `"arviz<1"` instead. Run on Colab before and after to confirm.
+1. **The Colab link was broken** (confirmed 2026-11-06: undefined `zip_filename`; fixed, see step 2). The notebook installs `nutpie` alone on Colab (`%pip install nutpie`). Since ArviZ 1.x, that pulls the new ArviZ and breaks Colab's older PyMC (Allen's rule, 2026-11-04). The fix: one install cell before importing PyMC, `if "google.colab" in sys.modules: %pip install -q "pymc>=6" "arviz>=1.1" nutpie preliz empiricaldist`, then check the results still match the post (a library upgrade). If the notebook must stay on PyMC 5: pin `"arviz<1"` instead. Run on Colab before and after to confirm.
 2. README: no links to the post, talk, slides, video or Colab; `conda` instructions.
 3. No license on GitHub.
 4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).
+5. **The README's "~8 points" doesn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).

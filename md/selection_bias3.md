@@ -36,27 +36,13 @@ I present a generative Bayesian model that explicitly incorporates this selectio
 
 ## Setup
 
-Install packages that might not be in a generic PyMC install.
+On Colab, install the packages that aren't in Colab's Python. The pins keep the stack on PyMC 5 and ArviZ 0.x, the versions this analysis was run with: newer nutpie and PreliZ would upgrade them and break Colab's PyMC.
 
 ```python
-try:
-    import preliz as pz
-except ImportError:
-    %pip install preliz
-```
+import sys
 
-```python
-try:
-    import empiricaldist
-except ImportError:
-    %pip install empiricaldist
-```
-
-```python
-try:
-    import nutpie
-except ImportError:
-    %pip install nutpie
+if "google.colab" in sys.modules:
+    %pip install -q nutpie "pymc<6" "arviz<1" "preliz==0.20.*" empiricaldist
 ```
 
 ```python
@@ -175,7 +161,8 @@ def download(url):
         local, _ = urlretrieve(url, filename)
         print("Downloaded " + local)
 
-download('https://github.com/AllenDowney/SelectionSAT/raw/main/sat_math_csv_files.zip')
+zip_filename = 'sat_math_csv_files.zip'
+download('https://github.com/AllenDowney/SelectionSAT/raw/main/' + zip_filename)
 ```
 
 ```python
