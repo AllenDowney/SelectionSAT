@@ -84,3 +84,18 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 3. No license on GitHub.
 4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).
 5. ~~**The README's "~8 points"**~~: fixed to about 5 (Allen, 2026-11-06). Still open: the `.nc` question below. **The README's "~8 points" didn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).
+
+---
+
+## Task 2: More data releases for the collection
+
+**Status:** Survey started 2026-11-06 (Allen asked); nothing downloaded into the repo. Allen decides what to add.
+
+The model uses the 2011–2015 "SAT Percentile Ranks for Males, Females, and Total Group" tables: counts by gender in **10-point bins** (61 bins). What else the College Board published:
+
+- **Same 10-point tables, other years: not found yet.** Guessed URLs for 2008–2010 math-only tables return 404 on `secure-media.collegeboard.org`. A third-party guide (collegestats.org) refers to a 2009 math table by gender. The way to settle it is the Wayback CDX index of `secure-media.collegeboard.org/digitalServices/pdf/*` (rate-limited on 2026-11-06; retry later, slowly).
+- **Total Group Profile Reports, 2006–2016 (old SAT, 200–800 scale): counts by gender in 100-point bands** (6 bins: 200–290 … 700–800) for math, reading and writing. Confirmed for 2010 (`research/2010-total-group-profile-report-cbs.pdf`, Table 5) and 2016 (`reports.collegeboard.org/media/pdf/2016-total-group-sat-suite-assessments-annual-report.pdf`); also listed: 2006 (`research/cb-seniors-2006-national-report.pdf`), 2007 (`research/cb-seniors-2007-national-report.pdf`), 2008 (`research/Total_Group_Report_CBS_08.pdf`), 2011 (`research/cbs2011_total_group_report.pdf`). These would extend the series to 2006–2016, at coarser resolution: the model would need binned (interval) likelihoods, and the 10-point "spikes" can't be modeled from them.
+- **State reports, same years and format** (e.g. `research/CT_10_03_03_01.pdf`, `ME_10_…`, `DE_12_…`): the same 100-point bands by gender, per state, with participation rates. **Analysis idea:** participation varies a lot between states (near-universal where the state pays for the SAT, e.g. Maine, Delaware, later Connecticut and Michigan), so the gender gap vs participation rate across states is a direct test of the selection explanation.
+- **SAT Suite annual reports, 2017–2025 (redesigned SAT):** percentages (not counts) by gender in 100-point bands, plus totals by gender. A different test and scale, so not poolable with 2011–2015, but a separate series. Confirmed for 2019 (`reports.collegeboard.org/media/pdf/2019-total-group-sat-suite-assessments-annual-report.pdf`); the 2025 URL found by search returned 404.
+
+Decisions for Allen: which of these to add (to `sat_math_csv_files.zip`, or a second zip); whether the state-level comparison is worth a notebook; data terms (the README links the PDFs, as for 2011–2015).
