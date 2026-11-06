@@ -1,0 +1,15 @@
+# Editor and Python clutter
+.vscode/
+.ipynb_checkpoints/
+__pycache__/
+
+# College Board source files: linked from the README, not redistributed.
+# The parsed counts are published in sat_math_csv_files.zip.
+*.pdf
+sat-percentile-ranks-*.csv
+
+# Contents of sat_math_csv_files.zip (the notebooks download and unzip it)
+sat_math_*.csv
+
+# Fitted model; published as a GitHub release asset
+*.nc
