@@ -18,7 +18,7 @@ dependencies:
   - scipy=1.16
   - xarray
   - h5netcdf          # read and write the saved fit (.nc)
-  - matplotlib
+  - matplotlib=3.10    # PreliZ 0.20 needs matplotlib.style.core (gone in 3.11)
   - seaborn
 
   # Bayesian modeling
