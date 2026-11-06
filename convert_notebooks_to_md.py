@@ -6,7 +6,6 @@ This script finds all .ipynb files in the current directory and converts them
 to Markdown format, saving the results in the md/ directory.
 """
 
-import os
 import sys
 from pathlib import Path
 

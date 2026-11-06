@@ -8,13 +8,13 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ### Current focus (2026-11-06)
 
-- **Task 1, step 2:** the Colab install cell (content issue 1) and a Colab run of `selection_bias3.ipynb`; then dead code (`utils.py`) and `make check`.
+- **Task 1, step 3:** codespell and a link check; check the claims (content issue 5: the README's ~8 points vs 5.4 in the notebook).
 
 ---
 
 ## Task 1: Refresh (research repo)
 
-**Status:** Steps 0–1 done and pushed 2026-11-06; step 2 under way (Colab)
+**Status:** Steps 0–1 done and pushed 2026-11-06; step 2 done 2026-11-06; next: step 3
 
 ### Inventory (2026-11-06, read-only)
 
@@ -61,8 +61,8 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
      - [x] **Colab run passes** (2026-11-06; Colab: Python 3.13, PyMC 5.28.5, ArviZ 0.22): all 85 code cells. Numbers match the published outputs within sampling noise: hierarchical `mu` Male 507.47 vs 507.50, Female 502.08 vs 502.08; model 2 `mu` 508.84 vs 508.81; model 1 `mu` 525.97 vs 526.19. Colab runs fewer chains (2,000 posterior-predictive draws vs 4,000; lower ESS). The committed notebook keeps its published outputs; only the setup and download cells changed.
      - Reference numbers: the post (a talk announcement) says only "about 30 points"; the observed gaps the notebook prints are 31.4, 33.8, 31.5, 31.3, 31.3 (2011–2015); the "~8 points" is the README's claim, shown only in plots (`selection_bias33.png`).
      - `selection_bias3_idata.nc` (2025-11-26) is not necessarily the published fit: the `to_netcdf` line in the published notebook is commented out. Its posterior mean of `mu` is 503.0 (Male) vs 502.6 (Female), a gap of ~0.3, not ~8 (content issue 5).
-   - [ ] Dead code: `utils.py`, `parse_raw.py`, `download_math_csv.py`, `convert_notebooks_to_md.py` (keep, merge or delete)
-   - [ ] CI: `make check` = pyflakes plus a syntax check of the notebooks (LifeExpectancy's `.github/scripts/check_notebooks.py`); no model fits in CI unless Allen wants a fast test
+   - [x] Dead code (2026-11-06): `utils.py` trimmed from 928 to 163 lines (Allen: keep the style): `AIBM_COLORS`, `configure_plot_style()` (applied on import; the figures from `selection_bias.ipynb` use it), `underride`, `value_counts`, `decorate`. The scripts stay (decision in step 1); pyflakes fixes in `parse_sat_math.py`, `scripts/parse_raw.py`, `convert_notebooks_to_md.py`. The full `utils.py` is in git history
+   - [x] CI: `make check` = pyflakes on the `.py` files plus `.github/scripts/check_notebooks.py` (adapted from LifeExpectancy: notebook syntax, with indented magics kept as `pass`; and the `md/` copies match the notebooks). `.github/workflows/check.yml` runs it on push. No model fits in CI
 3. Text and errors
    - [ ] codespell and a link check (README, notebooks)
    - [ ] Check the post's claims against the current outputs; anything different goes in content issues

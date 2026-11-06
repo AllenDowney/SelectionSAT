@@ -15,9 +15,11 @@ The analysis behind Allen's PyData Boston 2025 talk and the post "SAT math score
 - `figs/`: figures the notebooks save (used in the talk slides).
 - `md/`: jupytext copies of the notebooks. The `.ipynb` files are the source; after changing a notebook, run `make md` and commit both.
 - `parse_sat_math.py`: parses the College Board PDFs into per-year CSVs; `sat_math_csv_files.zip` holds the parsed CSVs the notebooks download. `scripts/`: small helpers (`parse_raw.py`, `download_math_csv.py`).
-- `utils.py`: helpers imported by every notebook except `selection_bias3.ipynb` (`decorate`, `value_counts`); most of the file is copied from an AIBM project and unused (board, step 2). The published `selection_bias3.ipynb` defines its own, so it runs on Colab alone.
+- `utils.py`: `decorate`, `value_counts`, and the plot style (AIBM colors, applied on import) that the figures from `selection_bias.ipynb` use; imported by every notebook except `selection_bias3.ipynb`, which defines its own `decorate`, so it runs on Colab alone.
 
 Run order: `parse_sat_math.py` (only to rebuild the CSVs from the PDFs) → `selection_bias3.ipynb` (fit, slow) → `selection_bias3_loo.ipynb`.
+
+Checks: `make check` (pyflakes, notebook syntax, `md/` copies current); CI runs it on every push. CI doesn't run the notebooks (they refit the models).
 
 ## Data terms
 

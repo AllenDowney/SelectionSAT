@@ -17,7 +17,7 @@ def parse_raw(pdf_path):
             
             text = page.extract_text()
             print(f"Text length: {len(text)} characters")
-            print(f"\nRAW TEXT (no parsing):")
+            print("\nRAW TEXT (no parsing):")
             print(text)
 
 if __name__ == "__main__":

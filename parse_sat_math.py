@@ -157,7 +157,7 @@ def parse_sat_percentiles(pdf_path, year):
     print(df.head(10))
     
     # Show data types
-    print(f"\nData types:")
+    print("\nData types:")
     print(df.dtypes)
     
     # Show statistics

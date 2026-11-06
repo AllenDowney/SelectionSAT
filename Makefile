@@ -18,7 +18,12 @@ clean:
 md:
 	python convert_notebooks_to_md.py
 
+# Static checks (also run by CI): pyflakes, notebook syntax, md/ copies current
+check:
+	pyflakes *.py scripts/*.py .github/scripts/*.py
+	python .github/scripts/check_notebooks.py
+
 zip:
 	zip sat_math_csv_files.zip sat_math_20[0-9][0-9].csv
 
-.PHONY: create_environment update_environment delete_environment clean md zip
+.PHONY: create_environment update_environment delete_environment clean md check zip
