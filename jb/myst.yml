@@ -1,0 +1,37 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+
+project:
+  title: "The SAT Math Gap: Gender Difference or Selection Bias?"
+  description: >-
+    A Bayesian model of SAT math scores, 2011-2015: how much of the
+    30-point gender gap could be explained by who takes the test.
+  keywords:
+    - SAT
+    - gender gap
+    - selection bias
+    - Bayesian model
+    - PyMC
+    - standardized testing
+  authors:
+    - name: Allen B. Downey
+      url: https://allendowney.com
+  github: https://github.com/AllenDowney/SelectionSAT
+  license:
+    content: CC-BY-NC-SA-4.0
+    code: MIT
+  toc:
+    - file: index.md
+      title: Home
+    - file: ../selection_bias3.ipynb
+      title: The Model
+    - file: ../selection_bias3_loo.ipynb
+      title: Which Data Matter Most?
+    - file: versions.md
+      title: Model Versions
+
+site:
+  template: book-theme
+  title: The SAT Math Gap
+  options:
+    logo_text: The SAT Math Gap

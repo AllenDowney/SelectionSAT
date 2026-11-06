@@ -12,7 +12,7 @@ jupyter:
     name: python3
 ---
 
-# Selection Bias - LOO Analysis
+# Which Data Matter Most? Leave-One-Out Analysis
 
 This notebook performs Leave-One-Out (LOO) analysis and data attribution for the hierarchical selection bias model. It identifies which score bins have the greatest influence on the model's predictions.
 

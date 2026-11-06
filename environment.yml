@@ -34,6 +34,10 @@ dependencies:
   - nbformat
   - pyflakes
 
+  # Site (jb/)
+  - jupyter-book>=2
+  - ghp-import
+
   - pip:
       - empiricaldist==0.9.0
       - pdfplumber==0.11.7   # parse_sat_math.py, scripts/parse_raw.py

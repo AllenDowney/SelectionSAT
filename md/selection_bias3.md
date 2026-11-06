@@ -12,7 +12,7 @@ jupyter:
     name: python3
 ---
 
-# Selection Bias
+# The SAT Math Gap: A Selection Model
 
 This notebook contains the model presented in a talk at *PyData Boston 2025*.
 

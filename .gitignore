@@ -16,3 +16,6 @@ sat_math_*.csv
 
 # Task 2 data collection (paused; not published)
 data/
+
+# Site build output
+jb/_build/
