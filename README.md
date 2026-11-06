@@ -76,7 +76,7 @@ Run order:
 
 1. `python parse_sat_math.py` — only to rebuild the CSV files from the PDFs (put the PDFs in this folder first); otherwise the notebooks download the parsed data.
 2. `selection_bias3.ipynb` — fits the models (several minutes).
-3. `selection_bias3_loo.ipynb` — loads the saved fit, `selection_bias3_idata.nc`. To create it, uncomment the `to_netcdf` line in `selection_bias3.ipynb`.
+3. `selection_bias3_loo.ipynb` — loads the saved fit, `selection_bias3_idata.nc`, and downloads it (about 180 MB) from the [`fit-2026-11` release](https://github.com/AllenDowney/SelectionSAT/releases/tag/fit-2026-11) if it isn't there. That fit is a refit of `selection_bias3.ipynb` (on the Unity cluster, `unity/refit.sh`) that matches the published results and adds the pointwise log-likelihood.
 
 `make check` runs the static checks that CI runs (pyflakes, and a check that every notebook's code parses and its `md/` copy is current).
 

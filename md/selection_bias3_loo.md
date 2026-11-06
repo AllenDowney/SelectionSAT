@@ -5,7 +5,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.18.1
+      jupytext_version: 1.19.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -40,10 +40,19 @@ plt.rcParams["axes.titlelocation"] = "left"
 
 ## Load Saved InferenceData
 
-Load the saved InferenceData from the hierarchical model. This allows us to perform LOO analysis without re-running the model.
+Load the saved InferenceData from the hierarchical model. This allows us to perform LOO analysis without re-running the model. If the file isn't here, the next cell downloads it (about 180 MB) from the [`fit-2026-11` release](https://github.com/AllenDowney/SelectionSAT/releases/tag/fit-2026-11), a refit of `selection_bias3.ipynb` that matches the published results and includes the pointwise log-likelihood.
 
 ```python
-idata = az.from_netcdf("selection_bias3_idata.nc")
+from os.path import exists
+from urllib.request import urlretrieve
+
+# The fitted model, from a refit of selection_bias3.ipynb (GitHub release fit-2026-11)
+filename = "selection_bias3_idata.nc"
+url = "https://github.com/AllenDowney/SelectionSAT/releases/download/fit-2026-11/" + filename
+if not exists(filename):
+    urlretrieve(url, filename)
+
+idata = az.from_netcdf(filename)
 ```
 
 ```python

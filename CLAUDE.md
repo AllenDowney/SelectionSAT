@@ -11,7 +11,7 @@ The analysis behind Allen's PyData Boston 2025 talk and the post "SAT math score
 ## What is where
 
 - `selection_bias.ipynb`, `selection_bias2.ipynb`, `selection_bias3.ipynb`, `selection_bias4.ipynb`: the four model versions (described in the README). Version 3 is the published one.
-- `selection_bias3_loo.ipynb`: LOO / data-attribution analysis; loads the fit `selection_bias3_idata.nc` that `selection_bias3.ipynb` saves (gitignored; to be published as a release asset).
+- `selection_bias3_loo.ipynb`: LOO / data-attribution analysis; loads the fit `selection_bias3_idata.nc` (gitignored), downloading it from the GitHub release `fit-2026-11` if missing. That fit is a refit on Unity (`unity/refit.sh`) with the log-likelihood added; it matches the published results (mu 507.6 / 502.1).
 - `figs/`: figures the notebooks save (used in the talk slides).
 - `md/`: jupytext copies of the notebooks. The `.ipynb` files are the source; after changing a notebook, run `make md` and commit both.
 - `parse_sat_math.py`: parses the College Board PDFs into per-year CSVs; `sat_math_csv_files.zip` holds the parsed CSVs the notebooks download. `scripts/`: small helpers (`parse_raw.py`, `download_math_csv.py`).
