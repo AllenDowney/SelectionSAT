@@ -5,7 +5,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.18.1
+      jupytext_version: 1.19.6
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -42,7 +42,7 @@ On Colab, install the packages that aren't in Colab's Python. The pins keep the 
 import sys
 
 if "google.colab" in sys.modules:
-    %pip install -q nutpie "pymc<6" "arviz<1" "preliz==0.20.*" empiricaldist
+    %pip install -q nutpie "pymc<6" "arviz<1" "preliz==0.20.*" "matplotlib<3.11" empiricaldist
 ```
 
 ```python

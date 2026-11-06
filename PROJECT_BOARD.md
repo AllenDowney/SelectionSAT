@@ -78,9 +78,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Notebook headings retitled (Allen): "The SAT Math Gap: A Selection Model" (`selection_bias3.ipynb`), "Which Data Matter Most? Leave-One-Out Analysis" (`selection_bias3_loo.ipynb`)
    - [x] `environment.yml`: `jupyter-book>=2`, `ghp-import`; `jb/_build/` gitignored
    - [x] SelectionSAT env **rebuilt from scratch** (2026-11-06): the first `mamba env update` sat for 22 minutes, most likely at the "Confirm changes" prompt (no `-y`, no terminal; mamba 2.5); the solve takes under a minute. Fresh `mamba env create -f environment.yml -y`: PyMC 5.25.1, ArviZ 0.22.0, nutpie 0.16.8, PreliZ 0.20.0, Jupyter Book 2.1.7. PreliZ 0.20 failed to import with matplotlib 3.11 (`matplotlib.style.core` is gone), so `matplotlib=3.10` is pinned. `make check` and `make build` pass in it
-   - [ ] **Colab risk:** the notebook's Colab cell pins `preliz==0.20.*`; if Colab moves to matplotlib 3.11, PreliZ will fail to import there too. Add `"matplotlib<3.11"` to the cell and rerun on Colab (when convenient, or when it breaks)
+   - [x] **Colab risk** fixed (2026-11-06): the Colab cell pins `preliz==0.20.*`, which fails with matplotlib 3.11, so the cell now also pins `"matplotlib<3.11"`. Colab rerun passes (85 code cells)
    - [x] **Live 2026-11-06: https://allendowney.github.io/SelectionSAT/** (gh-pages via ghp-import; built with the LifeExpectancy env's Jupyter Book 2.1.2 while the SelectionSAT env update ran). All pages, sitemap and robots.txt 200. `~/AllenDowney.github.io`: `Sitemap:` line, sitemap index regenerated, Research entry; pushed. About box: website, topics, description (`gh repo edit`; the same line in `~/GreenTeaPress/scripts/repo_about.sh`, committed locally there)
-   - [ ] Allen: submit `https://allendowney.github.io/SelectionSAT/sitemap.xml` in Search Console; tick GreenTeaPress Task 22
+   - [x] Sitemap submitted in Search Console (Allen, 2026-11-06); ticked in GreenTeaPress Task 22 (committed locally there)
 6. Cross-links
    - [x] Related posts (2026-11-06, `related-articles`): The Poincaré Problem, Berkson Goes to College, Factors of Underrepresentation, Causation Collision and Confusion; on the site's landing page ("Related posts")
    - [x] Drafts for Allen: `planning/crosslinks_drafts.md` (2026-11-06): an update paragraph for the Substack and blog posts (site link, the 5-point finding, GitHub, Colab), an optional "Related" line for three older posts, an optional book line. Allen pastes; for the blog, back up first
@@ -102,7 +102,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 2: More data releases for the collection
 
-**Status:** **Paused 2026-11-06** (Allen) to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
+**Status:** **Paused 2026-11-06** (Allen); assessment of the state data done the same day (below). Paused to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
 
 ### What happened
 
@@ -123,6 +123,16 @@ Checks: Male + Female = Total in every band (where Total excludes students with 
 - **State level looks most valuable.** In 2012 the math gap is smallest where nearly everyone takes the SAT: Maine 13 points (51.6% of test takers male), Delaware 21 (48.3%), both states that paid for the SAT for all students; in low-participation "ACT states" it is 40–46 (Iowa 46, Mississippi 43). Across the 25 states the gap ranges 12–62 points in each year, against about 31–37 nationally. That is a direct, model-free check of the selection explanation, and a natural extension of the model (selection varies by state with participation).
 - **National bands 2005–2016:** extend the series, but at 6–12 bins the model's 10-point "spikes" can't be fitted; useful for a binned-likelihood version or a check that the estimated selection is stable over time.
 - **Redesigned SAT 2018–2025:** a different test and scale, percentages only; a separate, simpler comparison (Male 11–13% vs Female 6–8% in the 700–800 math band).
+
+### Assessment of the state data (2026-11-06)
+
+Participation from the **NCES Digest table 226.40** (federal, public domain: 2013 edition for 2011–12 and 2012–13, 2014 edition for 2013–14, 2016 edition for 2014–15; saved as `data/nces_sat_participation.csv`; no 2015–16 column, so 2016 isn't matched). Joined with the 25 states' gaps (male minus female mean math) for 2012 and 2013: 50 state-years. Plot: `data/state_gap_vs_participation.png` (local).
+
+- **The gap shrinks as participation grows:** correlation −0.58 (2012), −0.67 (2013); a linear fit gives about −1.4 points per 10 percentage points, from about 42 points at 5% participation to about 28 at 100%. Correlation with the male share of test takers: −0.45.
+- **The universal-SAT states stand out:** Maine (93%; the state paid for the SAT for all juniors) 13 points in both years; Delaware (100%) 21–22. Low-participation "ACT states" (Iowa, Mississippi, Arkansas, Alabama, Louisiana; 3–9%) are at 40–53.
+- **Outlier:** DC (83%, gap 58).
+- **Caveats:** this is ecological (states differ in more than participation); in low-participation states the SAT takers are mostly applicants to selective colleges, and a larger gap in the upper tail (greater male variance) would produce the same pattern without sex-specific selection. A model with state-specific selection and the full score bands could separate the two; the means alone can't.
+- **How useful:** high, for a follow-up post or a model extension, and it's a check of the talk's conclusion with independent data. **What more data would add:** the other 26 states (more College Board PDFs), which would double the points and add more full-participation states (e.g. Idaho, Michigan, Illinois after they switched to the SAT, which is after 2016 on the redesigned test).
 
 ### Consistent with the terms? (to decide)
 
