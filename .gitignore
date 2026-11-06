@@ -19,3 +19,9 @@ data/
 
 # Site build output
 jb/_build/
+
+# Unity: local settings and job output
+unity/config.sh
+unity/logs/
+unity/UNITY_SYNC_STAMP
+results/

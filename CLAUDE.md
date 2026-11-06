@@ -29,6 +29,10 @@ The College Board PDFs and CSVs are not committed (gitignored); the README shoul
 
 `mamba env create -f environment.yml` (env `SelectionSAT`); always `mamba`, not `conda`.
 
+## Unity
+
+Heavy fits run on Unity (Allen, 2026-11-06; `unity` skill). `unity/`: `config.sh` (account and paths, not in git; copy `config.example.sh`), `unity_rsync.sh push|pull`, `refit.sh` (runs a copy of `selection_bias3.ipynb` with `to_netcdf` on), `submit.sh`. Env `SelectionSAT` on Unity from the same `environment.yml`. Results come back to `results/` (gitignored).
+
 ## Board
 
 `PROJECT_BOARD.md` (committed). The refresh follows `~/GreenTeaPress/plans/research_repos.md`; SEO in `~/GreenTeaPress/plans/seo.md`. Ask Allen's decisions in a dialog (AskUserQuestion), in batches.
