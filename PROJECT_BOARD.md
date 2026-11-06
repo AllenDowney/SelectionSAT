@@ -49,7 +49,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Inventory (above)
    - [x] Allen answered the decisions (2026-11-06, above)
 1. Set up
-   - [ ] Tag the published version (decision 2) and push the tag
+   - [x] Tagged `pydata-boston-2025` and `published-2025` on `6997859`, pushed (2026-11-06)
    - [ ] Triage untracked files with Allen (decisions 3–5); `.gitignore` for the rest (`.vscode/`, `.ipynb_checkpoints/`, `__pycache__/`, data PDFs if not published, `*.nc`)
    - [ ] Short `CLAUDE.md` (what the repo is, the published notebook and its frozen path, the talk and post, data terms, this checklist)
    - [ ] `environment.yml` (`mamba env create -f environment.yml`, env `SelectionSAT`); Makefile targets fixed or removed (`lint`/`format` point at nothing)
