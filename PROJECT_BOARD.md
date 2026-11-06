@@ -138,10 +138,16 @@ Participation from the **NCES Digest table 226.40** (federal, public domain: 201
 
 ### While the download runs (2026-11-06)
 
-- [x] Task 2 scripts committed: `scripts/parse_total_group.py`, `parse_state_reports.py`, `parse_suite_reports.py`, `download_state_reports.sh`
+- [x] Task 2 scripts kept **local and gitignored** (Allen, 2026-11-06: publish neither the derived data nor the scripts): `scripts/parse_total_group.py`, `parse_state_reports.py`, `parse_suite_reports.py`, `download_state_reports.sh`, `nces_participation.py`. They were briefly in two local commits, removed before any push
 - [x] Participation for 2009–2015, all states: `scripts/nces_participation.py` (NCES Digest 2010 table 154, 2012 table 174, 2013/2014/2016 table 226.40; 101 overlapping state-years agree exactly) → `data/nces_sat_participation.csv`. No 2015–16 (the 2017 edition switched to the redesigned SAT), so the 2016 state reports stay unmatched
 - [x] 2014–2015 state reports: not on the College Board's sites (probed `pdf/sat/`, `pdf/research/2014|2015/`, and the 2016 pattern on reports.collegeboard.org: all 404). Some state education departments host their own state's report
 - [x] Sketch of a state-level model: `planning/state_model.md` (latent ability by state and sex, selection by state, sex and year; separates sex-specific selection from greater male variance using high- vs low-participation states; validate by simulation; fit on Unity)
+
+### Decisions (Allen, 2026-11-06)
+
+- After the download: a **first look only** (the 51-state plots and the male share of takers); decide on the state model after seeing it
+- Graduates by sex: **find state-reported graduates by sex** (coverage will be uneven)
+- **Publish neither the derived data nor the scripts**; `data/` and the Task 2 scripts stay local
 
 ### Consistent with the terms? (to decide)
 

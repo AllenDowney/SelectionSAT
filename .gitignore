@@ -25,3 +25,10 @@ unity/config.sh
 unity/logs/
 unity/UNITY_SYNC_STAMP
 results/
+
+# Task 2 scripts (College Board data; Allen: not published)
+scripts/download_state_reports.sh
+scripts/nces_participation.py
+scripts/parse_state_reports.py
+scripts/parse_suite_reports.py
+scripts/parse_total_group.py
