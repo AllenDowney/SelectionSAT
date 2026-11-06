@@ -80,10 +80,13 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [ ] Deploy (`cd jb && make deploy`), then push `~/AllenDowney.github.io` (robots.txt `Sitemap:` line, sitemap index regenerated, Research entry: prepared, uncommitted) and set the About box (`gh repo edit`; `~/GreenTeaPress/scripts/repo_about.sh` has the SelectionSAT line, committed locally there)
    - [ ] Allen: submit `https://allendowney.github.io/SelectionSAT/sitemap.xml` in Search Console; tick GreenTeaPress Task 22
 6. Cross-links
-   - [ ] The post already links the Colab notebook. Add the repo (or site) link to the Substack and blog posts if Allen wants (drafts; back up the blog first)
-   - [ ] *Think Bayes* or the PyMC Labs workshop in the README's "next steps"
+   - [x] Related posts (2026-11-06, `related-articles`): The Poincaré Problem, Berkson Goes to College, Factors of Underrepresentation, Causation Collision and Confusion; on the site's landing page ("Related posts")
+   - [x] Drafts for Allen: `planning/crosslinks_drafts.md` (2026-11-06): an update paragraph for the Substack and blog posts (site link, the 5-point finding, GitHub, Colab), an optional "Related" line for three older posts, an optional book line. Allen pastes; for the blog, back up first
+   - [ ] Allen: paste the Substack and blog updates; then check the live post (`updated_at`)
+   - [x] *Think Bayes* and the PyMC Labs workshop in the README's "Learn more"
 7. Close
-   - [ ] Note what was done in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17
+   - [ ] **The fit as a release asset (plan, 2026-11-06).** `selection_bias3_idata.nc` (2025-11-26, 179 MB) is not the published fit (content issue 5). Plan: (1) run `selection_bias3.ipynb` in a scratch copy with the `to_netcdf` line on, in the pinned env (keep the committed notebook's published outputs); check the posterior means against the published ones (mu 507.5 / 502.1); (2) publish the `.nc` as an asset of a GitHub release `selection-fit-2026` (or attach to the `published-2025` tag's release, noting it's a refit); (3) in `selection_bias3_loo.ipynb`, download the file from the release if it's missing (like the zip); (4) rerun the LOO notebook against it and compare its influence figure with `figs/selection_bias3_loo_influence.png`. Allen decides whether the refit (not the original fit) is acceptable as "the published fit"
+   - [ ] Note what was done in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17 (done 2026-11-06, see there; update at the end)
 
 ### Content issues (Allen decides)
 

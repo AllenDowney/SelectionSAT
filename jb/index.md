@@ -40,6 +40,15 @@ So most of the observed gap could be explained by who takes the test rather than
 - [Which Data Matter Most?](../selection_bias3_loo.ipynb): a leave-one-out analysis of which score bins most influence the fit.
 - [Model Versions](versions.md): the four versions of the model and how they differ.
 
+## Related posts
+
+On [*Probably Overthinking It*](https://www.allendowney.com/blog/):
+
+- [The Poincaré Problem](https://www.allendowney.com/blog/2025/09/25/the-poincare-problem/): the first example in the talk, using Bayesian methods to correct for selection bias.
+- [Berkson Goes to College](https://www.allendowney.com/blog/2021/04/07/berkson-goes-to-college/): how selection in college admissions creates a misleading correlation between SAT math and verbal scores.
+- [Factors of Underrepresentation](https://www.allendowney.com/blog/2021/08/25/factors-of-underrepresentation/): men at the top of the SAT math range, and math versus verbal ability, in women's underrepresentation in math-intensive fields.
+- [Causation, Collision, and Confusion](https://www.allendowney.com/blog/2023/05/10/causation-collision-and-confusion/): a talk on Berkson's paradox and other errors caused by biased samples.
+
 ## Data
 
 The data are the College Board's "SAT Percentile Ranks for Males, Females, and Total Group" tables for college-bound seniors, mathematics section, 2011–2015, which give the number of male and female test takers at each score from 200 to 800. The [README](https://github.com/AllenDowney/SelectionSAT#data) links the original reports.
