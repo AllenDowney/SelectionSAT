@@ -155,6 +155,15 @@ Participation from the **NCES Digest table 226.40** (federal, public domain: 201
 - `scripts/nces_graduates.py` (local) → `data/nces_graduates_by_sex.csv`: 101 state-years. The male share of graduates ranges from 43% to 52% across states and changed by at most 2.5 points within a state from 2010 to 2012, so for 2009, 2011 and 2013 use the nearest year's share times the total graduates (implied by NCES participation)
 - Caveat: SAT takers include private-school students; the graduates are public-school only
 
+### First look, all 51 states (2026-11-06)
+
+Download finished: 306 state reports (51 × 2009–2013, 2016; 157 new, at one request every 30 s; no failures, no throttling). All parse and pass the checks (the parser now treats an all-blank band row as zeros: ND_13, ND_16, WY_13). Joined with NCES participation (2009–2013) and graduates by sex: 255 state-years. Local outputs: `data/state_first_look.png`, `data/state_first_look.csv`.
+
+- **The gap falls as participation rises:** pooled correlation −0.54 (by year −0.40 to −0.61); fit 41 points at 5% participation, 28 at 100%. Means by participation: 0–10% 41.6; 10–50% 36.7; 50–80% 33.4; 80–100% 28.2.
+- **Boys are underrepresented among test takers almost everywhere:** the male share of takers is about 3 points below the male share of public-school graduates at every participation level (−2.8 below 10%, −3.8 at 10–50%, −3.3 at 50–80%, −1.0 above 80%), and about zero only at full participation (Maine +0.1, Delaware +0.3).
+- **What that says about the two explanations** (`planning/state_model.md`): if the gap came from greater male variance with selection on ability only, boys would be *over*represented among takers in low-participation states, where takers come from the upper tail. They're underrepresented there too, which favors sex-specific selection (boys less likely to take the SAT at a given ability). Not conclusive: ecological; graduates are public-school only; and the underrepresentation barely varies with participation (correlation 0.14), which the model would have to explain.
+- Next, if Allen wants: the state model (Allen chose a first look first).
+
 ### Consistent with the terms? (to decide)
 
 - Downloading individual reports that the College Board posts for the public, for analysis, is their intended use; **bulk automated downloading** is what the no-scraping clause most plausibly covers.
