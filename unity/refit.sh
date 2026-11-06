@@ -7,7 +7,8 @@
 #SBATCH -o unity/logs/%x-%j.out
 #
 # Refit the published model: run a copy of selection_bias3.ipynb with the
-# to_netcdf line switched on, and keep the executed notebook and the fit.
+# to_netcdf line switched on (plus the log-likelihood the LOO notebook needs),
+# and keep the executed notebook and the fit.
 #
 # Submit from the laptop, after unity/unity_rsync.sh push:
 #   unity/submit.sh [sbatch options, e.g. -p cpu,cpu-preempt --requeue]
@@ -36,11 +37,17 @@ nb = nbformat.read('selection_bias3.ipynb', 4)
 n = 0
 for c in nb.cells:
     if c.cell_type == 'code' and '# idata3.to_netcdf("selection_bias3_idata.nc")' in c.source:
-        c.source = c.source.replace('# idata3.to_netcdf(', 'idata3.to_netcdf(')
+        # selection_bias3_loo.ipynb needs the pointwise log-likelihood, which the
+        # published notebook doesn't compute; computing it after sampling
+        # doesn't change the draws.
+        c.source = c.source.replace(
+            '# idata3.to_netcdf(',
+            'pm.compute_log_likelihood(idata3, model=model, extend_inferencedata=True)\n'
+            'idata3.to_netcdf(')
         n += 1
 assert n == 1, f'expected one to_netcdf line, found {n}'
 nbformat.write(nb, sys.argv[1])
-print('to_netcdf switched on')
+print('to_netcdf switched on, with log-likelihood')
 PY
 
 cd "$OUT"
