@@ -136,6 +136,13 @@ Participation from the **NCES Digest table 226.40** (federal, public domain: 201
 - **Caveats:** this is ecological (states differ in more than participation); in low-participation states the SAT takers are mostly applicants to selective colleges, and a larger gap in the upper tail (greater male variance) would produce the same pattern without sex-specific selection. A model with state-specific selection and the full score bands could separate the two; the means alone can't.
 - **How useful:** high, for a follow-up post or a model extension, and it's a check of the talk's conclusion with independent data. **What more data would add:** the other 26 states (more College Board PDFs), which would double the points and add more full-participation states (e.g. Idaho, Michigan, Illinois after they switched to the SAT, which is after 2016 on the redesigned test).
 
+### While the download runs (2026-11-06)
+
+- [x] Task 2 scripts committed: `scripts/parse_total_group.py`, `parse_state_reports.py`, `parse_suite_reports.py`, `download_state_reports.sh`
+- [x] Participation for 2009–2015, all states: `scripts/nces_participation.py` (NCES Digest 2010 table 154, 2012 table 174, 2013/2014/2016 table 226.40; 101 overlapping state-years agree exactly) → `data/nces_sat_participation.csv`. No 2015–16 (the 2017 edition switched to the redesigned SAT), so the 2016 state reports stay unmatched
+- [x] 2014–2015 state reports: not on the College Board's sites (probed `pdf/sat/`, `pdf/research/2014|2015/`, and the 2016 pattern on reports.collegeboard.org: all 404). Some state education departments host their own state's report
+- [x] Sketch of a state-level model: `planning/state_model.md` (latent ability by state and sex, selection by state, sex and year; separates sex-specific selection from greater male variance using high- vs low-participation states; validate by simulation; fit on Unity)
+
 ### Consistent with the terms? (to decide)
 
 - Downloading individual reports that the College Board posts for the public, for analysis, is their intended use; **bulk automated downloading** is what the no-scraping clause most plausibly covers.
