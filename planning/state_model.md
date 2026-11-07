@@ -41,3 +41,14 @@ For state *s*, sex *g*, year *y*:
 - 2014 and 2015 state reports: not found on the College Board's sites (several URL patterns 404); some state education departments host their own state's report.
 - 2006–2008 state reports: not found (same patterns 404).
 - Graduates by sex by state: needed for the takers likelihood; see above.
+
+## First fits and diagnosis (2026-11-06)
+
+Code: `state/state_model.py` (local only). Smoke tests on 5–10 states, 2 chains, short runs.
+
+- **Identified:** fitting version A to data simulated from A (5 states) recovers the truth: δ 7.5 (8), σ 105.0/118.2 (105/118), β 0.60/1.21 (0.6/1.2), s_part 0.10 (0.15).
+- **Real data, 10 states** (IA, MS, KS, CO, AZ, CA, FL, GA, MA, ME; 3–93% participation), bands only and bands + participation:
+  1. **Two modes.** One chain found β_female ≈ −1.5 (lower-ability girls *more* likely to take), δ ≈ −160, and a much worse band log-likelihood (−9,411 vs −5,919). Fix: keep the slopes positive.
+  2. **Bands alone can't separate a state's mean ability from its selection.** Bands-only implies 86% participation in Iowa and 79% in Mississippi (observed 3–4%): high-scoring takers can be "strong state, little selection" or "average state, strong selection". Participation is what identifies selection.
+  3. **With participation, the fit still conflicts** (good mode): it matches IA, MS, KS but implies too much participation in CA (85–93% vs 48–57%) and AZ, and more male than female participation in most states (observed: 46% of takers male). It absorbs this with large participation noise (s_part ≈ 0.93) and a large latent gap (δ ≈ 56, β_female 1.72 > β_male 1.31, the opposite of the talk's conclusion). One selection slope per sex for every state can't fit both the band shapes and participation.
+- **Next options:** positive slopes; selection slopes by state (hierarchical, with a male–female offset that A frees and B fixes at 0); and treat participation as more precise (s_part fixed near 0.1–0.2, since the rates are probably good to within 10–20%), so the model can't ignore it.

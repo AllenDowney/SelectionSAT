@@ -33,3 +33,7 @@ scripts/parse_state_reports.py
 scripts/parse_suite_reports.py
 scripts/parse_total_group.py
 scripts/nces_graduates.py
+
+# Task 2 state model (local only)
+state/
+selection_state.ipynb
