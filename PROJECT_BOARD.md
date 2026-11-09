@@ -6,10 +6,10 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 **Guides:** the research-repo refresh checklist, `~/GreenTeaPress/plans/research_repos.md` (steps 0–7 below follow it); SEO in `~/GreenTeaPress/plans/seo.md`; the list of repos and their order in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17. Ask Allen's decisions in a dialog (AskUserQuestion), in batches.
 
-### Current focus (2026-11-06)
+### Current focus (2026-11-09: stopping point)
 
-- **Task 1:** the site is live. Open: Allen submits the sitemap and pastes the post updates (`planning/crosslinks_drafts.md`); the Wayback 2014 link to recheck later (step 3).
-- **Task 2:** paused to assess the collected data against the College Board's terms (see Task 2).
+- **Task 1: done.** The site is live, the sitemap is submitted, the blog is updated, and the fit is released. Two items are left for Allen: paste the Substack update (step 6), and recheck the Wayback 2014 link from another network (step 3).
+- **Task 2: parked** at the state-model diagnosis (see Task 2, "To resume"). Everything is local and gitignored, on the laptop only, with no backup (Allen, 2026-11-09). The PDFs can be downloaded again with `scripts/download_state_reports.sh`, about 2.5 hours at the slow rate.
 
 ---
 
@@ -70,9 +70,9 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] Claims (2026-11-06): the post only says "about 30 points" (the notebook: 31.3–33.8). The README's "~8 points" was wrong; Allen chose the notebook's number: now "about 5 points" (mu 507.5 vs 502.1)
 4. README for readers of the published work
    - [x] README rewritten (2026-11-06): the talk (video `6pwtbNVgyzg`, slides, the post, Colab link, the bread notebook) first; findings (about 5 points) and method from the old text; what is where; data (links to the five PDFs, 2014–2015 via the Internet Archive); running it (Colab, mamba, run order, `make check`); model versions (kept); how to cite (the talk; the `published-2025` tag); license; learn more (*Think Bayes*, the workshop). `LICENSE` (MIT). All new links 200
-   - [ ] Decision 6 also says the notebooks' last cell states both licenses: not done yet (it would add a cell to the published notebook; ask Allen)
+   - [x] Decision 6 also says the notebooks' last cell states both licenses: done (next item)
    - [x] License cell (code MIT, text CC BY-NC-SA 4.0, repo link) at the end of all five notebooks (Allen, 2026-11-06)
-   - [ ] **Data terms** (looked up 2026-11-06): collegeboard.org/site-terms now redirects to the student legal terms (privacy.collegeboard.org/student-legal-terms). Section 8: "Our Content may not be distributed, downloaded, uploaded, reproduced, reposted, retransmitted, disseminated, sold, published, broadcast, or circulated, or otherwise used, in part or in whole, in any way whatsoever without our express written permission," and "You may not … scrape or data-mine College Board Services or Content." Section 10: non-commercial use only. No terms specific to the research reports were found, and no permission process for them (the permission form covers test materials). The repo has published parsed counts (`sat_math_csv_files.zip`) since 2025; numerical facts aren't copyrightable in the US, but the terms are contractual. Allen (2026-11-06): **keep the zip, with attribution**; no permission request
+   - [x] **Data terms** (looked up 2026-11-06): collegeboard.org/site-terms now redirects to the student legal terms (privacy.collegeboard.org/student-legal-terms). Section 8: "Our Content may not be distributed, downloaded, uploaded, reproduced, reposted, retransmitted, disseminated, sold, published, broadcast, or circulated, or otherwise used, in part or in whole, in any way whatsoever without our express written permission," and "You may not … scrape or data-mine College Board Services or Content." Section 10: non-commercial use only. No terms specific to the research reports were found, and no permission process for them (the permission form covers test materials). The repo has published parsed counts (`sat_math_csv_files.zip`) since 2025; numerical facts aren't copyrightable in the US, but the terms are contractual. Allen (2026-11-06): **keep the zip, with attribution**; no permission request
 5. Site and SEO (decision 7: yes; Allen confirmed Jupyter Book 2 / MyST, 2026-11-06)
    - [x] Site in `jb/` (2026-11-06; Jupyter Book 2.1.2 / book theme): `myst.yml`, `index.md` (the talk with the video embedded, findings with the mu posterior figure, pages, data, how to cite), `versions.md`; the notebooks render in place from `../` (no copies), with their saved outputs. `postbuild.py` from LifeExpectancy (`BASE = '/SelectionSAT'`), plus `DESCRIPTIONS` for the two notebook pages (the theme gives them the project's description; a frontmatter cell would show on Colab). Social image `figs/selection_bias33.png`. Test build in a scratch copy: 4 pages, sitemap with real URLs, no localhost, canonical, counter, descriptions. Allen reviewed it ("looks good")
    - [x] Notebook headings retitled (Allen): "The SAT Math Gap: A Selection Model" (`selection_bias3.ipynb`), "Which Data Matter Most? Leave-One-Out Analysis" (`selection_bias3_loo.ipynb`)
@@ -90,13 +90,15 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
    - [x] *Think Bayes* and the PyMC Labs workshop in the README's "Learn more"
 7. Close
    - [x] **The fit as a release asset (done 2026-11-06).** The saved `selection_bias3_idata.nc` (2025-11-26) was not the published fit and had no log-likelihood (the LOO notebook's outputs show the 2025-11-21 fit it ran against did). Refit on Unity (`unity/refit.sh`; env `SelectionSAT` built there from `environment.yml`; 7–8 minutes on 4 CPUs): the first refit matched but had no log-likelihood, so the job now runs `pm.compute_log_likelihood` before saving (doesn't change the draws). Result: mu 507.59 / 502.08 (published 507.5 / 502.1), r-hat at most 1.00, no divergences, `log_likelihood.obs_bins` (4, 1000, 5, 2). The LOO notebook run against it reproduces the published influence figure. **Release `fit-2026-11`** (Allen's choice) with the `.nc` (checksum verified after download); `selection_bias3_loo.ipynb` downloads it if missing; README and `CLAUDE.md` updated; site redeployed. Local copies: `selection_bias3_idata.nc` (the refit), `results/old/selection_bias3_idata_2025-11-26.nc`, `results/refit-2026-11-06-nolik/`
-   - [ ] Note what was done in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17 (done 2026-11-06, see there; update at the end)
+   - [x] Note what was done in `~/AllenDowneyCom/PROJECT_BOARD.md` Task 17 (done 2026-11-06, see there)
 
 ### Content issues (Allen decides)
 
-1. **The Colab link was broken** (confirmed 2026-11-06: undefined `zip_filename`; fixed, see step 2). The notebook installs `nutpie` alone on Colab (`%pip install nutpie`). Since ArviZ 1.x, that pulls the new ArviZ and breaks Colab's older PyMC (Allen's rule, 2026-11-04). The fix: one install cell before importing PyMC, `if "google.colab" in sys.modules: %pip install -q "pymc>=6" "arviz>=1.1" nutpie preliz empiricaldist`, then check the results still match the post (a library upgrade). If the notebook must stay on PyMC 5: pin `"arviz<1"` instead. Run on Colab before and after to confirm.
-2. README: no links to the post, talk, slides, video or Colab; `conda` instructions.
-3. No license on GitHub.
+All resolved 2026-11-06 (steps 2, 4, 7).
+
+1. ~~**The Colab link was broken** (confirmed 2026-11-06: undefined `zip_filename`; fixed, see step 2). The notebook installs `nutpie` alone on Colab (`%pip install nutpie`). Since ArviZ 1.x, that pulls the new ArviZ and breaks Colab's older PyMC (Allen's rule, 2026-11-04). The fix: one install cell before importing PyMC, `if "google.colab" in sys.modules: %pip install -q "pymc>=6" "arviz>=1.1" nutpie preliz empiricaldist`, then check the results still match the post (a library upgrade). If the notebook must stay on PyMC 5: pin `"arviz<1"` instead. Run on Colab before and after to confirm.~~ Fixed: stays on PyMC 5 with pins (step 2).
+2. ~~README: no links to the post, talk, slides, video or Colab; `conda` instructions.~~ Rewritten (step 4).
+3. ~~No license on GitHub.~~ MIT `LICENSE` (step 4).
 4. ~~`plan.md` (LOO plan)~~: done; deleted (Allen, 2026-11-06).
 5. ~~**The README's "~8 points"**~~: fixed to about 5 (Allen, 2026-11-06). ~~The `.nc` question~~: resolved by the refit and release `fit-2026-11` (step 7). **The README's "~8 points" didn't match the published notebook.** The hierarchical model's posterior means of `mu` (published outputs, and the Colab rerun 2026-11-06) are Male 507.5, Female 502.1: a gap of about **5.4 points**. `selection_bias3_idata.nc` (2025-11-26) is a different fit (Male 503.0, Female 502.6), so it isn't the published one. Check the talk slides for the number Allen presented; fix the README (step 4); decide whether to refit and save the published fit before publishing the `.nc` (decision 5).
 
@@ -104,7 +106,7 @@ The analysis behind the PyData Boston 2025 talk and the post "SAT math scores: g
 
 ## Task 2: More data releases for the collection
 
-**Status:** **Resumed 2026-11-06 at a slow rate** (Allen: "we have half of the data. I'm not sure our downloading constitutes scraping"): `scripts/download_state_reports.sh` gets the remaining state reports (2009–2013, 2016), one request every 30 seconds, stopping on 429/403. Earlier the same day: paused, then assessed (below). Paused to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
+**Status:** **Parked 2026-11-09** at the state-model diagnosis (Allen: stopping point; see "To resume" at the end). Download finished 2026-11-06 (306 state reports). Earlier: **resumed 2026-11-06 at a slow rate** (Allen: "we have half of the data. I'm not sure our downloading constitutes scraping"): `scripts/download_state_reports.sh` got the remaining state reports (2009–2013, 2016), one request every 30 seconds, stopping on 429/403. Earlier the same day: paused, then assessed (below). Paused to assess what we have, how useful more data would be, and whether it can be obtained in ways consistent with the College Board's terms. Nothing in `data/` is committed (`data/` is gitignored).
 
 ### What happened
 
@@ -115,7 +117,7 @@ Allen asked (2026-11-06) to look for more data, then chose all four leads: retry
 | File | Contents | Source PDFs |
 |---|---|---|
 | `data/sat_bands_national.csv` | Old SAT, national, counts by sex in score bands: 50-point bands 2005–2008 (12 bins), 100-point bands 2009–2013 and 2016 (6 bins); math, reading, writing. 2014–2015 not found | `research/cb-seniors-2005-total-group-report.pdf`, `…-2006-national-report.pdf`, `…-2007-national-report.pdf`, `Total_Group_Report_CBS_08.pdf`, `cbs-2009-national-TOTAL-GROUP.pdf`, `2010-total-group-profile-report-cbs.pdf`, `cbs2011_total_group_report.pdf`, `TotalGroup-2012.pdf`, `2013/TotalGroup-2013.pdf`, reports.collegeboard.org 2016 suite report |
-| `data/sat_bands_state.csv`, `data/sat_participation_state.csv` | Old SAT, 25 states (AL–MS, with DC), 2009–2013 and 2016: counts by sex in 100-point bands; test takers and mean math by sex. No participation rate (needs graduates: NCES Digest table 226.40, public domain) | `research/ST_yy_03_03_01.pdf` (2009–2012), `research/2013/ST_13_…`, `reports.collegeboard.org/media/pdf/st16030301.pdf` |
+| `data/sat_bands_state.csv`, `data/sat_participation_state.csv` | Old SAT, all 51 (50 states and DC; 25 at first, the rest after the slow download), 2009–2013 and 2016: counts by sex in 100-point bands; test takers and mean math by sex. Participation and graduates by sex from NCES (below) | `research/ST_yy_03_03_01.pdf` (2009–2012), `research/2013/ST_13_…`, `reports.collegeboard.org/media/pdf/st16030301.pdf` |
 | `data/sat_bands_suite.csv` | Redesigned SAT, national, 2018–2025: **percentages** by sex in 100-point bands (2017 has no bands by sex) | reports.collegeboard.org data archive |
 
 Checks: Male + Female = Total in every band (where Total excludes students with no gender); bands sum to the reported test takers; 2011–2013 bands equal the 10-point tables summed. Parsers: `scripts/parse_total_group.py`, `scripts/parse_state_reports.py`, `scripts/parse_suite_reports.py` (uncommitted). **No 10-point tables for other years were found** (URL guesses 404; the Wayback index was rate-limited).
@@ -165,8 +167,17 @@ Download finished: 306 state reports (51 × 2009–2013, 2016; 157 new, at one r
 - Next, if Allen wants: the state model (Allen chose a first look first).
 - **State model started (Allen, 2026-11-06)** in `state/` (local, gitignored, with `selection_state.ipynb`): recovers known parameters from simulated data, but the first real fits conflict. Diagnosis (Allen chose to diagnose before changing the model) in `planning/state_model.md`, "First fits and diagnosis": a bad mode with negative selection; bands alone can't separate state ability from selection, so participation is essential; with participation, one slope per sex can't fit all states (implied δ ≈ 56, s_part ≈ 0.93).
 
-### Consistent with the terms? (to decide)
+### Consistent with the terms? (decided 2026-11-06)
+
+Allen: resume at a slow rate (one request every 30 s; "I'm not sure our downloading constitutes scraping"), and publish neither the derived data nor the scripts. The notes from before that decision:
 
 - Downloading individual reports that the College Board posts for the public, for analysis, is their intended use; **bulk automated downloading** is what the no-scraping clause most plausibly covers.
 - Alternatives: ask the College Board for permission or a data file (permission form, or the research office); **state education departments** post their own state's reports (e.g. New Hampshire's 2014 report on education.nh.gov), under their own terms; **NCES Digest** tables (federal, public domain) give means by sex and participation by state, though not distributions.
 - Publishing: like `sat_math_csv_files.zip` (Allen: keep it, attributed), but any new data release is a separate decision.
+
+### To resume (2026-11-09)
+
+- **Files:** `state/state_model.py` (CLI: `python state_model.py fit A|B --state-list IA,MS,... [--no-rate]`, or `sim A fit A` to check that it recovers known parameters), `state/selection_state.ipynb`, `data/` (CSVs plus `data/raw/` PDFs). All local, gitignored, not backed up.
+- **Where it stopped:** `planning/state_model.md`, "First fits and diagnosis".
+- **Next, in order:** (1) keep the selection slopes positive (e.g. LogNormal β); (2) fix s_part near 0.15, or give it a tight prior, so the model can't ignore participation; (3) if it still misfits, make the slopes vary by state (hierarchical), with a male–female offset that A frees and B fixes at 0. Validate each change by simulation, then fit the 10 test states, then all 51 on Unity (`unity/`).
+- **Then:** compare A and B with LOO, plus posterior predictive checks of the gap and the male share of takers against participation.
